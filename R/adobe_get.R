@@ -14,5 +14,11 @@ adobe_get <- function(datacenter, endpoint, auth) {
 
   r <- httr::GET(fullURL, httr::add_headers(Authorization = auth))
 
-  return(httr::content(r))
+  #representation as it came from API
+  r_text <- httr::content(r, as = "text", encoding = "UTF-8")
+
+  #parse JSON into data frame if possible
+  parsed <- jsonlite::fromJSON(r_text, simplifyDataFrame = TRUE, flatten = TRUE)
+
+  return(c(response = r_text, parsed))
 }
