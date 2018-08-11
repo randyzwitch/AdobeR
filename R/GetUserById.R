@@ -12,5 +12,5 @@
 GetUserById <- function(id="me"){
   endpoint <- paste("users/", id, sep = "")
   resp <- adobe_get(datacenter, endpoint, auth = auth)
-  return(AnalyticsUser$new(resp))
+  return(resp)
 }
