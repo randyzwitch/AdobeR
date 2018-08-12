@@ -5,7 +5,6 @@ Authors@R: person("Randy", "Zwitch", email = "rzwitch+adober@gmail.com", role = 
 Description: Retrieves data from an Adobe Analytics
 Depends: R (>= 3.5)
 Imports: httr (>= 1.3.1),
-         R6 (>= 2.2.2),
          jsonlite(>= 1.5),
          plyr(>= 1.8.4)
 Suggests:
@@ -14,4 +13,4 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 BugReports: https://github.com/randyzwitch/AdobeR
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
