@@ -1,6 +1,6 @@
-#' @description Returns companies user can access, based on the credentials returned from `AdobeOAuth()`
+#' @description Returns companies user can access, based on Token 2.0 credentials
 #'
-#' @title Returns companies user can access
+#' @title Companies user id can access
 #'
 #' @return data.frame or S3 object of class "CompanyAccess"
 #' @export

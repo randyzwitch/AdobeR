@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetUserCompanyAccess.R
 \name{GetUserCompanyAccess}
 \alias{GetUserCompanyAccess}
-\title{Returns companies user can access}
+\title{Companies user id can access}
 \usage{
 GetUserCompanyAccess(as.data.frame = TRUE)
 }
@@ -10,7 +10,7 @@ GetUserCompanyAccess(as.data.frame = TRUE)
 data.frame or S3 object of class "CompanyAccess"
 }
 \description{
-Returns companies user can access, based on the credentials returned from `AdobeOAuth()`
+Returns companies user can access, based on Token 2.0 credentials
 }
 \examples{
 \dontrun{
