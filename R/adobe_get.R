@@ -1,6 +1,6 @@
 #' @export
 #' @keywords internal
-adobe_get <- function(baseurl, endpoint, auth) {
+adobe_get <- function(baseurl, endpoint, auth, globalCompanyId = NULL) {
   #TODO: Input validation
 
   #Set headers
@@ -10,6 +10,10 @@ adobe_get <- function(baseurl, endpoint, auth) {
       'x-api-key' = auth$app$key,
       'Accept' = 'application/json'
     )
+
+  if(!is.null(globalCompanyId)){
+    headers <- c(headers, 'x-proxy-global-company-id' = globalCompanyId)
+  }
 
   #Build URL
   fullURL <- paste(baseurl, endpoint, sep = "")
