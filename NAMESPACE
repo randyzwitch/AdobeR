@@ -2,10 +2,12 @@
 
 S3method(as.data.frame,CalculatedMetrics)
 S3method(as.data.frame,CompanyAccess)
+S3method(as.data.frame,Segments)
 S3method(as.data.frame,Users)
 export(AdobeOAuth)
 export(CompanyAccess)
 export(GetCalculatedMetrics)
+export(GetSegments)
 export(GetUserCompanyAccess)
 export(GetUsers)
 export(adobe_get)
