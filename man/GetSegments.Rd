@@ -4,7 +4,7 @@
 \alias{GetSegments}
 \title{GetSegments}
 \usage{
-GetSegments(globalCompanyId, as.data.frame = TRUE)
+GetSegments(globalCompanyId, id = NULL, as.data.frame = TRUE)
 }
 \arguments{
 \item{as.data.frame}{}
