@@ -1,21 +1,31 @@
 #' GetTags
 #'
 #' @param globalCompanyId
+#' @param id
 #' @param as.data.frame
 #'
 #' @return
 #' @export
 #'
 #' @examples
-GetTags <- function(globalCompanyId, as.data.frame=TRUE) {
+GetTags <- function(globalCompanyId, id=NULL, as.data.frame=TRUE) {
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",
                       globalCompanyId)
+  resource <- "/tags"
 
-  r <- adobe_get(endpoint, "/tags", AdobeRInternals$auth, globalCompanyId)
+  if(!is.null(id)){
+    resource <- paste(resource, "/", id, sep="")
+  }
+
+  r <- adobe_get(endpoint, resource, AdobeRInternals$auth, globalCompanyId)
 
   #Set S3 method for easier parsing later
-  class(r) <- "Tags"
+  if(is.null(id)){
+    class(r) <- "Tags"
+  } else {
+    class(r) <- "Tag"
+  }
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){
@@ -35,6 +45,23 @@ as.data.frame.Tags <- function(x) {
 
 #' @export
 #' @keywords internal
-CompanyAccess <- function(x) {
+CreateTags <- function(x) {
   UseMethod("Tags", x)
 }
+
+#' @export
+#' @keywords internal
+as.data.frame.Tag <- function(x) {
+
+  df <- as.data.frame(list(id = x$response$id,
+                           name = x$response$name))
+  return(df)
+
+}
+
+#' @export
+#' @keywords internal
+CreateTag <- function(x) {
+  UseMethod("Tag", x)
+}
+

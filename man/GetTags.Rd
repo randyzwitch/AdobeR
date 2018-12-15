@@ -4,7 +4,7 @@
 \alias{GetTags}
 \title{GetTags}
 \usage{
-GetTags(globalCompanyId, as.data.frame = TRUE)
+GetTags(globalCompanyId, id = NULL, as.data.frame = TRUE)
 }
 \arguments{
 \item{as.data.frame}{}
