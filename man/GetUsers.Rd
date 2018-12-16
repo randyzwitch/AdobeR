@@ -4,7 +4,7 @@
 \alias{GetUsers}
 \title{GetUsers}
 \usage{
-GetUsers(globalCompanyId, as.data.frame = TRUE)
+GetUsers(globalCompanyId, id = NULL, as.data.frame = TRUE)
 }
 \arguments{
 \item{as.data.frame}{}
