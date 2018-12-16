@@ -1,31 +1,31 @@
-#' GetDimensions
+#' GetMetrics
 #'
 #' @param globalCompanyId
 #' @param rsid
-#' @param dimension
+#' @param metric
 #' @param as.data.frame
 #'
 #' @return
 #' @export
 #'
 #' @examples
-GetDimensions <- function(globalCompanyId, rsid, dimension=NULL, as.data.frame=TRUE) {
+GetMetrics <- function(globalCompanyId, rsid, metric=NULL, as.data.frame=TRUE) {
 
-  endpoint <- sprintf("https://analytics.adobe.io/api/%s/dimensions",
+  endpoint <- sprintf("https://analytics.adobe.io/api/%s/metrics",
                       globalCompanyId)
   resource <- paste("?rsid=", rsid, sep="")
 
-  if(!is.null(dimension)){
-    endpoint <- paste(endpoint, "/", dimension, sep="")
+  if(!is.null(metric)){
+    endpoint <- paste(endpoint, "/", metric, sep="")
   }
 
   r <- adobe_get(endpoint, resource, AdobeRInternals$auth, globalCompanyId)
 
   #Set S3 method for easier parsing later
-  if(is.null(dimension)){
-    class(r) <- "Dimensions"
+  if(is.null(metric)){
+    class(r) <- "Metrics"
   } else {
-    class(r) <- "Dimension"
+    class(r) <- "Metric"
   }
 
   #Return a data.frame or just an S3 object
@@ -38,7 +38,7 @@ GetDimensions <- function(globalCompanyId, rsid, dimension=NULL, as.data.frame=T
 
 #' @export
 #' @keywords internal
-as.data.frame.Dimensions <- function(x) {
+as.data.frame.Metrics <- function(x) {
 
   return(x$response)
 
@@ -46,13 +46,13 @@ as.data.frame.Dimensions <- function(x) {
 
 #' @export
 #' @keywords internal
-Dimensions <- function(x) {
-  UseMethod("Dimensions", x)
+Metrics <- function(x) {
+  UseMethod("Metrics", x)
 }
 
 #' @export
 #' @keywords internal
-as.data.frame.Dimension <- function(x) {
+as.data.frame.Metric <- function(x) {
 
   filled <- lapply(x$response, function(x) ifelse(is.null(x), "NA", x))
 
@@ -62,6 +62,6 @@ as.data.frame.Dimension <- function(x) {
 
 #' @export
 #' @keywords internal
-Dimension <- function(x) {
-  UseMethod("Dimension", x)
+Metric <- function(x) {
+  UseMethod("Metric", x)
 }
