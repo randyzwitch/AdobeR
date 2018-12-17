@@ -4,10 +4,6 @@ as.data.frame.CalculatedMetrics <- function(x) x$response$content
 
 #' @export
 #' @keywords internal
-CalcMetrics <- function(x) UseMethod("CalculatedMetrics", x)
-
-#' @export
-#' @keywords internal
 as.data.frame.CalculatedMetric <- function(x) {
 
   if(is.null(x$response$description)){
@@ -30,15 +26,7 @@ as.data.frame.CalculatedMetric <- function(x) {
 
 #' @export
 #' @keywords internal
-CalcMetric <- function(x) UseMethod("CalculatedMetric", x)
-
-#' @export
-#' @keywords internal
 as.data.frame.Dimensions <- function(x) return(x$response)
-
-#' @export
-#' @keywords internal
-Dimensions <- function(x) UseMethod("Dimensions", x)
 
 #' @export
 #' @keywords internal
@@ -52,15 +40,7 @@ as.data.frame.Dimension <- function(x) {
 
 #' @export
 #' @keywords internal
-Dimension <- function(x) UseMethod("Dimension", x)
-
-#' @export
-#' @keywords internal
 as.data.frame.ReportSuites <- function(x) x$response$content
-
-#' @export
-#' @keywords internal
-ReportSuites <- function(x) UseMethod("ReportSuites", x)
 
 #' @export
 #' @keywords internal
@@ -76,15 +56,7 @@ as.data.frame.ReportSuite <- function(x) {
 
 #' @export
 #' @keywords internal
-ReportSuite <- function(x) UseMethod("ReportSuite", x)
-
-#' @export
-#' @keywords internal
 as.data.frame.Segments <- function(x) x$response$content
-
-#' @export
-#' @keywords internal
-Segments <- function(x) UseMethod("Segments", x)
 
 #' @export
 #' @keywords internal
@@ -104,15 +76,7 @@ as.data.frame.Segment <- function(x) {
 
 #' @export
 #' @keywords internal
-Segment <- function(x) UseMethod("Segment", x)
-
-#' @export
-#' @keywords internal
 as.data.frame.Tags <- function(x) return(x$response$content)
-
-#' @export
-#' @keywords internal
-CreateTags <- function(x) UseMethod("Tags", x)
 
 #' @export
 #' @keywords internal
@@ -126,19 +90,7 @@ as.data.frame.Tag <- function(x) {
 
 #' @export
 #' @keywords internal
-CreateTag <- function(x) UseMethod("Tag", x)
-
-#' @export
-#' @keywords internal
-CompanyAccess <- function(x) UseMethod("CompanyAccess", x)
-
-#' @export
-#' @keywords internal
 as.data.frame.Users <- function(x) x$response$content
-
-#' @export
-#' @keywords internal
-Users <- function(x) UseMethod("Users", x)
 
 #' @export
 #' @keywords internal
@@ -152,15 +104,7 @@ as.data.frame.User <- function(x) {
 
 #' @export
 #' @keywords internal
-User <- function(x) UseMethod("User", x)
-
-#' @export
-#' @keywords internal
 as.data.frame.Metrics <- function(x) x$response
-
-#' @export
-#' @keywords internal
-Metrics <- function(x) UseMethod("Metrics", x)
 
 #' @export
 #' @keywords internal
@@ -174,15 +118,7 @@ as.data.frame.Metric <- function(x) {
 
 #' @export
 #' @keywords internal
-Metric <- function(x) UseMethod("Metric", x)
-
-#' @export
-#' @keywords internal
 as.data.frame.DateRanges <- function(x) x$response$content
-
-#' @export
-#' @keywords internal
-DateRanges <- function(x) UseMethod("DateRanges", x)
 
 #' @export
 #' @keywords internal
@@ -195,7 +131,3 @@ as.data.frame.DateRange <- function(x) {
   return(df)
 
 }
-
-#' @export
-#' @keywords internal
-DateRange <- function(x) UseMethod("DateRange", x)
