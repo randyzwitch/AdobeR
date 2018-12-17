@@ -35,33 +35,3 @@ GetMetrics <- function(globalCompanyId, rsid, metric=NULL, as.data.frame=TRUE) {
 
   return(r)
 }
-
-#' @export
-#' @keywords internal
-as.data.frame.Metrics <- function(x) {
-
-  return(x$response)
-
-}
-
-#' @export
-#' @keywords internal
-Metrics <- function(x) {
-  UseMethod("Metrics", x)
-}
-
-#' @export
-#' @keywords internal
-as.data.frame.Metric <- function(x) {
-
-  filled <- lapply(x$response, function(x) ifelse(is.null(x), "NA", x))
-
-  return(as.data.frame(filled))
-
-}
-
-#' @export
-#' @keywords internal
-Metric <- function(x) {
-  UseMethod("Metric", x)
-}

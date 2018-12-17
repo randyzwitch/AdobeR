@@ -51,9 +51,3 @@ as.data.frame.CompanyAccess <- function(x) {
   return(df)
 
 }
-
-#' @export
-#' @keywords internal
-CompanyAccess <- function(x) {
-  UseMethod("CompanyAccess", x)
-}

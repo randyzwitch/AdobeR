@@ -34,34 +34,3 @@ GetTags <- function(globalCompanyId, id=NULL, as.data.frame=TRUE) {
 
   return(r)
 }
-
-#' @export
-#' @keywords internal
-as.data.frame.Tags <- function(x) {
-
-  return(x$response$content)
-
-}
-
-#' @export
-#' @keywords internal
-CreateTags <- function(x) {
-  UseMethod("Tags", x)
-}
-
-#' @export
-#' @keywords internal
-as.data.frame.Tag <- function(x) {
-
-  df <- as.data.frame(list(id = x$response$id,
-                           name = x$response$name))
-  return(df)
-
-}
-
-#' @export
-#' @keywords internal
-CreateTag <- function(x) {
-  UseMethod("Tag", x)
-}
-

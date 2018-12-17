@@ -35,39 +35,3 @@ GetSegments <- function(globalCompanyId, id=NULL, as.data.frame=TRUE) {
 
   return(r)
 }
-
-#' @export
-#' @keywords internal
-as.data.frame.Segments <- function(x) {
-
-  return(x$response$content)
-
-}
-
-#' @export
-#' @keywords internal
-Segments <- function(x) {
-  UseMethod("Segments", x)
-}
-
-#' @export
-#' @keywords internal
-as.data.frame.Segment <- function(x) {
-
-  df <- as.data.frame(list(
-    id = x$response$id,
-    name = x$response$name,
-    description = x$response$description,
-    rsid = x$response$rsid,
-    onwer.id = x$response$owner$id
-  ))
-
-  return(df)
-
-}
-
-#' @export
-#' @keywords internal
-Segment <- function(x) {
-  UseMethod("Segment", x)
-}

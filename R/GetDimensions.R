@@ -35,33 +35,3 @@ GetDimensions <- function(globalCompanyId, rsid, dimension=NULL, as.data.frame=T
 
   return(r)
 }
-
-#' @export
-#' @keywords internal
-as.data.frame.Dimensions <- function(x) {
-
-  return(x$response)
-
-}
-
-#' @export
-#' @keywords internal
-Dimensions <- function(x) {
-  UseMethod("Dimensions", x)
-}
-
-#' @export
-#' @keywords internal
-as.data.frame.Dimension <- function(x) {
-
-  filled <- lapply(x$response, function(x) ifelse(is.null(x), "NA", x))
-
-  return(as.data.frame(filled))
-
-}
-
-#' @export
-#' @keywords internal
-Dimension <- function(x) {
-  UseMethod("Dimension", x)
-}

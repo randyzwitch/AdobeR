@@ -35,35 +35,3 @@ GetDateRanges <- function(globalCompanyId, dateRangeId=NULL, as.data.frame=TRUE)
 
   return(r)
 }
-
-#' @export
-#' @keywords internal
-as.data.frame.DateRanges <- function(x) {
-
-  return(x$response$content)
-
-}
-
-#' @export
-#' @keywords internal
-DateRanges <- function(x) {
-  UseMethod("DateRanges", x)
-}
-
-#' @export
-#' @keywords internal
-as.data.frame.DateRange <- function(x) {
-
-  filled <- lapply(x$response, function(x) ifelse(is.null(x), "NA", x))
-  df <- as.data.frame(filled)
-
-  names(df) <- c("id", "name", "description", "owner.id")
-  return(df)
-
-}
-
-#' @export
-#' @keywords internal
-DateRange <- function(x) {
-  UseMethod("DateRange", x)
-}

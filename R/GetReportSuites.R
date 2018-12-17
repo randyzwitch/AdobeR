@@ -34,35 +34,3 @@ GetReportSuites <- function(globalCompanyId, rsid=NULL, as.data.frame=TRUE) {
 
   return(r)
 }
-
-#' @export
-#' @keywords internal
-as.data.frame.ReportSuites <- function(x) {
-
-  return(x$response$content)
-
-}
-
-#' @export
-#' @keywords internal
-ReportSuites <- function(x) {
-  UseMethod("ReportSuites", x)
-}
-
-#' @export
-#' @keywords internal
-as.data.frame.ReportSuite <- function(x) {
-
-  df <- as.data.frame(list(collectionItemType = x$response$collectionItemType,
-                           rsid = x$response$rsid)
-                      )
-
-  return(df)
-
-}
-
-#' @export
-#' @keywords internal
-ReportSuite <- function(x) {
-  UseMethod("ReportSuite", x)
-}

@@ -34,33 +34,3 @@ GetUsers <- function(globalCompanyId, id=NULL, as.data.frame=TRUE) {
 
   return(r)
 }
-
-#' @export
-#' @keywords internal
-as.data.frame.Users <- function(x) {
-
-  return(x$response$content)
-
-}
-
-#' @export
-#' @keywords internal
-Users <- function(x) {
-  UseMethod("Users", x)
-}
-
-#' @export
-#' @keywords internal
-as.data.frame.User <- function(x) {
-
-  filled <- lapply(x$response, function(x) ifelse(is.null(x), "NA", x))
-
-  return(as.data.frame(filled))
-
-}
-
-#' @export
-#' @keywords internal
-User <- function(x) {
-  UseMethod("User", x)
-}
