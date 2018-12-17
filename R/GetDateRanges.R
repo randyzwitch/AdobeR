@@ -1,30 +1,31 @@
-#' GetUsers
+#' GetDateRanges
 #'
 #' @param globalCompanyId
+#' @param dateRangeId
 #' @param as.data.frame
 #'
 #' @return
 #' @export
 #'
 #' @examples
-GetUsers <- function(globalCompanyId, id=NULL, as.data.frame=TRUE) {
+GetDateRanges <- function(globalCompanyId, dateRangeId=NULL, as.data.frame=TRUE) {
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",
                       globalCompanyId)
 
-  resource <- "/users"
+  resource <- "/dateranges"
 
-  if(!is.null(id)){
-    resource <- paste(resource, "/", id, sep="")
+  if(!is.null(dateRangeId)){
+    resource <- paste(resource, "/", dateRangeId, sep="")
   }
 
   r <- adobe_get(endpoint, resource, AdobeRInternals$auth, globalCompanyId)
 
   #Set S3 method for easier parsing later
-  if(is.null(id)){
-    class(r) <- "Users"
+  if(is.null(dateRangeId)){
+    class(r) <- "DateRanges"
   } else {
-    class(r) <- "User"
+    class(r) <- "DateRange"
   }
 
   #Return a data.frame or just an S3 object
@@ -37,7 +38,7 @@ GetUsers <- function(globalCompanyId, id=NULL, as.data.frame=TRUE) {
 
 #' @export
 #' @keywords internal
-as.data.frame.Users <- function(x) {
+as.data.frame.DateRanges <- function(x) {
 
   return(x$response$content)
 
@@ -45,22 +46,24 @@ as.data.frame.Users <- function(x) {
 
 #' @export
 #' @keywords internal
-Users <- function(x) {
-  UseMethod("Users", x)
+DateRanges <- function(x) {
+  UseMethod("DateRanges", x)
 }
 
 #' @export
 #' @keywords internal
-as.data.frame.User <- function(x) {
+as.data.frame.DateRange <- function(x) {
 
   filled <- lapply(x$response, function(x) ifelse(is.null(x), "NA", x))
+  df <- as.data.frame(filled)
 
-  return(as.data.frame(filled))
+  names(df) <- c("id", "name", "description", "owner.id")
+  return(df)
 
 }
 
 #' @export
 #' @keywords internal
-User <- function(x) {
-  UseMethod("User", x)
+DateRange <- function(x) {
+  UseMethod("DateRange", x)
 }
