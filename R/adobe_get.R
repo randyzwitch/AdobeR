@@ -29,6 +29,13 @@ adobe_get <- function(baseurl, endpoint, auth, globalCompanyId = NULL) {
   #parse JSON into data frame if possible
   parsed <- jsonlite::fromJSON(r_text, simplifyDataFrame = TRUE, flatten = TRUE)
 
+  #Check to see if Adobe returns an error message
+  if(!is.null(parsed$errorCode)){
+    stop(sprintf("Error %s: %s", parsed$errorCode, parsed$errorDescription))
+  } else if(!is.null(parsed$error_code)){
+    stop(sprintf("Error %s: %s", parsed$error_code, parsed$message))
+  }
+
   #return original content, as well as the parsed response from jsonlite
   return(list(json = r_text, response = parsed))
 }
