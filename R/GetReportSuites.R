@@ -1,6 +1,5 @@
 #' GetReportSuites
 #'
-#' @param globalCompanyId
 #' @param rsid
 #' @param as.data.frame
 #'
@@ -8,7 +7,9 @@
 #' @export
 #'
 #' @examples
-GetReportSuites <- function(globalCompanyId, rsid=NULL, as.data.frame=TRUE) {
+GetReportSuites <- function(rsid=NULL, as.data.frame=TRUE) {
+
+  globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",
                       globalCompanyId)

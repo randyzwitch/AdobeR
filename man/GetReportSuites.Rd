@@ -4,7 +4,7 @@
 \alias{GetReportSuites}
 \title{GetReportSuites}
 \usage{
-GetReportSuites(globalCompanyId, rsid = NULL, as.data.frame = TRUE)
+GetReportSuites(rsid = NULL, as.data.frame = TRUE)
 }
 \arguments{
 \item{as.data.frame}{}
