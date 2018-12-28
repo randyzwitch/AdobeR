@@ -1,6 +1,5 @@
 #' GetSegments
 #'
-#' @param globalCompanyId
 #' @param id
 #' @param as.data.frame
 #'
@@ -8,7 +7,9 @@
 #' @export
 #'
 #' @examples
-GetSegments <- function(globalCompanyId, id=NULL, as.data.frame=TRUE) {
+GetSegments <- function(id=NULL, as.data.frame=TRUE) {
+
+  globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",
                       globalCompanyId)

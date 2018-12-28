@@ -4,7 +4,7 @@
 \alias{GetCalculatedMetrics}
 \title{GetCalculatedMetrics}
 \usage{
-GetCalculatedMetrics(globalCompanyId, id = NULL, as.data.frame = TRUE)
+GetCalculatedMetrics(id = NULL, as.data.frame = TRUE)
 }
 \arguments{
 \item{as.data.frame}{}

@@ -4,7 +4,7 @@
 \alias{GetMetrics}
 \title{GetMetrics}
 \usage{
-GetMetrics(globalCompanyId, rsid, metric = NULL, as.data.frame = TRUE)
+GetMetrics(rsid, metric = NULL, as.data.frame = TRUE)
 }
 \arguments{
 \item{as.data.frame}{}

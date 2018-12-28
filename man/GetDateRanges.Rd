@@ -4,8 +4,7 @@
 \alias{GetDateRanges}
 \title{GetDateRanges}
 \usage{
-GetDateRanges(globalCompanyId, dateRangeId = NULL,
-  as.data.frame = TRUE)
+GetDateRanges(dateRangeId = NULL, as.data.frame = TRUE)
 }
 \arguments{
 \item{as.data.frame}{}

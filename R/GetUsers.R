@@ -1,13 +1,15 @@
 #' GetUsers
 #'
-#' @param globalCompanyId
+#' @param id
 #' @param as.data.frame
 #'
 #' @return
 #' @export
 #'
 #' @examples
-GetUsers <- function(globalCompanyId, id=NULL, as.data.frame=TRUE) {
+GetUsers <- function(id=NULL, as.data.frame=TRUE) {
+
+  globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",
                       globalCompanyId)

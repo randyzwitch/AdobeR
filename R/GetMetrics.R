@@ -1,6 +1,5 @@
 #' GetMetrics
 #'
-#' @param globalCompanyId
 #' @param rsid
 #' @param metric
 #' @param as.data.frame
@@ -9,10 +8,13 @@
 #' @export
 #'
 #' @examples
-GetMetrics <- function(globalCompanyId, rsid, metric=NULL, as.data.frame=TRUE) {
+GetMetrics <- function(rsid, metric=NULL, as.data.frame=TRUE) {
+
+  globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s/metrics",
                       globalCompanyId)
+
   resource <- paste("?rsid=", rsid, sep="")
 
   if(!is.null(metric)){
