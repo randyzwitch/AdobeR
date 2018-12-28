@@ -1,12 +1,20 @@
 #' GetUsers
 #'
-#' @param id
-#' @param as.data.frame
+#' @param id (character) ID of user you want to retrieve
+#' @param as.data.frame (logical) Return result as data.frame
 #'
-#' @return
+#' @return data.frame or S3 (Users | User)
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#'
+#' users <- GetUsers()
+#' users.nodf <- GetUsers(as.data.frame = FALSE) #returns S3 Users
+#' userme <- GetUsers("me")
+#' userme.nodf <- GetUsers("me", as.data.frame = FALSE)
+#'
+#' }
 GetUsers <- function(id=NULL, as.data.frame=TRUE) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId

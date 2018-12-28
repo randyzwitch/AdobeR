@@ -1,13 +1,20 @@
 #' GetDimensions
 #'
-#' @param rsid
-#' @param dimension
-#' @param as.data.frame
+#' @param rsid (character) The report suite ID
+#' @param dimension (character) The dimension ID
+#' @param as.data.frame (logical) Return result as data.frame
 #'
-#' @return
+#' @return data.frame or S3 (Dimensions | Dimension)
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' dims <- GetDimensions("zwitchdev")
+#' dims.nodf <- GetDimensions("zwitchdev", as.data.frame = FALSE)
+#' dimsevar1 <- GetDimensions("zwitchdev", "evar1")
+#' dimsevar1.nodf <- GetDimensions("zwitchdev", "evar1", as.data.frame = FALSE)
+#'
+#' }
 GetDimensions <- function(rsid, dimension=NULL, as.data.frame=TRUE) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId
