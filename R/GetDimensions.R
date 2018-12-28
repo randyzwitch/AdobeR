@@ -1,6 +1,5 @@
 #' GetDimensions
 #'
-#' @param globalCompanyId
 #' @param rsid
 #' @param dimension
 #' @param as.data.frame
@@ -9,7 +8,9 @@
 #' @export
 #'
 #' @examples
-GetDimensions <- function(globalCompanyId, rsid, dimension=NULL, as.data.frame=TRUE) {
+GetDimensions <- function(rsid, dimension=NULL, as.data.frame=TRUE) {
+
+  globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s/dimensions",
                       globalCompanyId)

@@ -4,8 +4,7 @@
 \alias{GetDimensions}
 \title{GetDimensions}
 \usage{
-GetDimensions(globalCompanyId, rsid, dimension = NULL,
-  as.data.frame = TRUE)
+GetDimensions(rsid, dimension = NULL, as.data.frame = TRUE)
 }
 \arguments{
 \item{as.data.frame}{}

@@ -1,6 +1,5 @@
 #' GetTags
 #'
-#' @param globalCompanyId
 #' @param id
 #' @param as.data.frame
 #'
@@ -8,7 +7,9 @@
 #' @export
 #'
 #' @examples
-GetTags <- function(globalCompanyId, id=NULL, as.data.frame=TRUE) {
+GetTags <- function(id=NULL, as.data.frame=TRUE) {
+
+  globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",
                       globalCompanyId)

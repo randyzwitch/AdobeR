@@ -1,6 +1,5 @@
 #' GetDateRanges
 #'
-#' @param globalCompanyId
 #' @param dateRangeId
 #' @param as.data.frame
 #'
@@ -8,7 +7,9 @@
 #' @export
 #'
 #' @examples
-GetDateRanges <- function(globalCompanyId, dateRangeId=NULL, as.data.frame=TRUE) {
+GetDateRanges <- function(dateRangeId=NULL, as.data.frame=TRUE) {
+
+  globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",
                       globalCompanyId)
