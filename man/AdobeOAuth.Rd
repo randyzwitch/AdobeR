@@ -4,7 +4,7 @@
 \alias{AdobeOAuth}
 \title{OAuth2 authentication for Adobe Analytics API}
 \usage{
-AdobeOAuth(key, secret,
+AdobeOAuth(key, secret, globalCompanyId = NULL,
   scope = "openid,AdobeID,read_organizations,additional_info.job_function,additional_info.projectedProductContext",
   authfile = ".httr-oauth")
 }
@@ -12,6 +12,8 @@ AdobeOAuth(key, secret,
 \item{key}{key}
 
 \item{secret}{secret}
+
+\item{globalCompanyId}{globalCompanyId}
 
 \item{scope}{scope}
 

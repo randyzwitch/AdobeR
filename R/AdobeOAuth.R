@@ -6,6 +6,7 @@
 #'
 #' @param key key
 #' @param secret secret
+#' @param globalCompanyId globalCompanyId
 #' @param scope scope
 #' @param authfile authfile
 #'
@@ -15,18 +16,20 @@
 #' @examples
 #'
 AdobeOAuth <- function(key,
-                        secret,
-                        scope="openid,AdobeID,read_organizations,additional_info.job_function,additional_info.projectedProductContext",
-                        authfile=".httr-oauth") {
+                       secret,
+                       globalCompanyId=NULL,
+                       scope="openid,AdobeID,read_organizations,additional_info.job_function,additional_info.projectedProductContext",
+                       authfile=".httr-oauth") {
 
   #TODO: Input validation
   #TODO: Check if authfile exists. If so, don't build new one
   #TODO: If authfile exists, test if it works or expired. If expired, refresh
 
   #ELSE: run build code below
-  adobe_endpoints <- httr::oauth_endpoint(authorize = sprintf("https://ims-na1.adobelogin.com/ims/authorize?client_id=%s&scope=%s&response_type=code", key, scope),
-                                    access = "https://ims-na1.adobelogin.com/ims/token/v1"
-                                    )
+  adobe_endpoints <- httr::oauth_endpoint(
+                    authorize = sprintf("https://ims-na1.adobelogin.com/ims/authorize/v1?client_id=%s&scope=%s&response_type=code", key, scope),
+                    access = "https://ims-na1.adobelogin.com/ims/token/v1"
+                    )
 
   #TODO: determine if these are always correct or should be function arguments
   auth <- httr::oauth2.0_token(
@@ -39,6 +42,15 @@ AdobeOAuth <- function(key,
 
   #Assign to AdobeRInternals environment, so that other functions know where auth located
   assign("auth", auth, envir = AdobeRInternals)
+
+  #If user-specifies globalCompanyId, then store it
+  #Otherwise, get the id by calling GetUserCompanyAccess
+  if(!is.null(globalCompanyId)){
+    assign("globalCompanyId", globalCompanyId, envir = AdobeRInternals)
+  } else {
+    guca <- GetUserCompanyAccess()
+    assign("globalCompanyId", guca$globalCompanyId, envir = AdobeRInternals)
+  }
 
 }
 

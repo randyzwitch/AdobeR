@@ -6,8 +6,8 @@ adobe_get <- function(baseurl, endpoint, auth, globalCompanyId = NULL) {
   #Set headers
   headers <-
     c(
-      'Authorization' = sprintf("Bearer %s", auth$credentials$access_token),
-      'x-api-key' = auth$app$key,
+      'Authorization' = sprintf("Bearer %s", AdobeRInternals$auth$credentials$access_token),
+      'x-api-key' = AdobeRInternals$auth$app$key,
       'Accept' = 'application/json'
     )
 
