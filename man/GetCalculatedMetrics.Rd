@@ -7,8 +7,25 @@
 GetCalculatedMetrics(id = NULL, as.data.frame = TRUE)
 }
 \arguments{
-\item{as.data.frame}{}
+\item{id}{(character) The calculated metric ID to retrieve}
+
+\item{as.data.frame}{(logical) Return result as data.frame}
+}
+\value{
+data.frame or S3 (CalculatedMetric | CalculatedMetrics)
 }
 \description{
 GetCalculatedMetrics
+}
+\examples{
+\dontrun{
+cm <- GetCalculatedMetrics()
+cmid <- GetCalculatedMetrics("cm300005752_557fc500e4b013edc2a85531")
+
+#returns S3 CalculatedMetrics
+cm.nodf <- GetCalculatedMetrics(as.data.frame=FALSE)
+#returns S3 CalculatedMetric
+cmid.nodf <- GetCalculatedMetrics("cm300005752_557fc500e4b013edc2a85531", as.data.frame = FALSE)
+
+}
 }

@@ -7,8 +7,22 @@
 GetReportSuites(rsid = NULL, as.data.frame = TRUE)
 }
 \arguments{
-\item{as.data.frame}{}
+\item{rsid}{(character) ID of desired report suite}
+
+\item{as.data.frame}{(logical) Return result as data.frame}
+}
+\value{
+data.frame or S3 (ReportSuites | ReportSuite)
 }
 \description{
 GetReportSuites
+}
+\examples{
+\dontrun{
+grs <- GetReportSuites()
+grs.nodf <- GetReportSuites(as.data.frame = FALSE)
+grsrsid <- GetReportSuites("zwitchdev")
+grsrsid.nodf <- GetReportSuites("zwitchdev", as.data.frame = FALSE)
+
+}
 }

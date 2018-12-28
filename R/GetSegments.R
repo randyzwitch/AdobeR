@@ -1,12 +1,19 @@
 #' GetSegments
 #'
-#' @param id
-#' @param as.data.frame
+#' @param id (character) Segment ID to retrieve
+#' @param as.data.frame (logical) Return result as data.frame
 #'
-#' @return
+#' @return data.frame or S3 (Segments | Segment)
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' seg <- GetSegments()
+#' seg.nodf <- GetSegments(as.data.frame = FALSE)
+#' segid <- GetSegments("5433e4e6e4b02df70be4ac63")
+#' segid.nodf <- GetSegments("5433e4e6e4b02df70be4ac63", FALSE)
+#'
+#' }
 GetSegments <- function(id=NULL, as.data.frame=TRUE) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId

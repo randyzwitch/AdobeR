@@ -1,12 +1,19 @@
 #' GetReportSuites
 #'
-#' @param rsid
-#' @param as.data.frame
+#' @param rsid (character) ID of desired report suite
+#' @param as.data.frame (logical) Return result as data.frame
 #'
-#' @return
+#' @return data.frame or S3 (ReportSuites | ReportSuite)
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' grs <- GetReportSuites()
+#' grs.nodf <- GetReportSuites(as.data.frame = FALSE)
+#' grsrsid <- GetReportSuites("zwitchdev")
+#' grsrsid.nodf <- GetReportSuites("zwitchdev", as.data.frame = FALSE)
+#'
+#' }
 GetReportSuites <- function(rsid=NULL, as.data.frame=TRUE) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId

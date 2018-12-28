@@ -7,8 +7,23 @@
 GetDateRanges(dateRangeId = NULL, as.data.frame = TRUE)
 }
 \arguments{
-\item{as.data.frame}{}
+\item{dateRangeId}{(character) The DateRange id for which to retrieve information}
+
+\item{as.data.frame}{(logical) Return result as data.frame}
+}
+\value{
+data.frame or S3 (DateRanges | DateRange)
 }
 \description{
 GetDateRanges
+}
+\examples{
+\dontrun{
+
+gdr <- GetDateRanges()
+gdr.nodf <- GetDateRanges(as.data.frame = FALSE)
+gdrid <- GetDateRanges("5c16f34fc66baa47fdd93804")
+gdrid.nodf <- GetDateRanges("5c16f34fc66baa47fdd93804", as.data.frame = FALSE)
+
+}
 }

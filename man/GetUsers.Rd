@@ -7,8 +7,23 @@
 GetUsers(id = NULL, as.data.frame = TRUE)
 }
 \arguments{
-\item{as.data.frame}{}
+\item{id}{(character) ID of user you want to retrieve}
+
+\item{as.data.frame}{(logical) Return result as data.frame}
+}
+\value{
+data.frame or S3 (Users | User)
 }
 \description{
 GetUsers
+}
+\examples{
+\dontrun{
+
+users <- GetUsers()
+users.nodf <- GetUsers(as.data.frame = FALSE) #returns S3 Users
+userme <- GetUsers("me")
+userme.nodf <- GetUsers("me", as.data.frame = FALSE)
+
+}
 }

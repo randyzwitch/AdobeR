@@ -1,12 +1,19 @@
 #' GetTags
 #'
-#' @param id
-#' @param as.data.frame
+#' @param id (character) ID for tag to retrieve
+#' @param as.data.frame (logical) Return result as data.frame
 #'
-#' @return
+#' @return data.frame or S3 (Tags | Tag)
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#'
+#' gtag <- GetTags()
+#' gtag.nodf <- GetTags(as.data.frame = FALSE) #returns S3 Tags
+#' gtagid <- GetTags("28638")
+#' gtagid.nodf <- GetTags("28638", as.data.frame = FALSE)
+#' }
 GetTags <- function(id=NULL, as.data.frame=TRUE) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId

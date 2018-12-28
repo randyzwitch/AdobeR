@@ -7,8 +7,24 @@
 GetDimensions(rsid, dimension = NULL, as.data.frame = TRUE)
 }
 \arguments{
-\item{as.data.frame}{}
+\item{rsid}{(character) The report suite ID}
+
+\item{dimension}{(character) The dimension ID}
+
+\item{as.data.frame}{(logical) Return result as data.frame}
+}
+\value{
+data.frame or S3 (Dimensions | Dimension)
 }
 \description{
 GetDimensions
+}
+\examples{
+\dontrun{
+dims <- GetDimensions("zwitchdev")
+dims.nodf <- GetDimensions("zwitchdev", as.data.frame = FALSE)
+dimsevar1 <- GetDimensions("zwitchdev", "evar1")
+dimsevar1.nodf <- GetDimensions("zwitchdev", "evar1", as.data.frame = FALSE)
+
+}
 }

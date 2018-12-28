@@ -7,8 +7,25 @@
 GetMetrics(rsid, metric = NULL, as.data.frame = TRUE)
 }
 \arguments{
-\item{as.data.frame}{}
+\item{rsid}{(character) ID of desired report suite}
+
+\item{metric}{(character) ID of the metric for which to retrieve info}
+
+\item{as.data.frame}{(logical) Return result as data.frame}
+}
+\value{
+data.frame or S3 (Metrics | Metric)
 }
 \description{
 GetMetrics
+}
+\examples{
+\dontrun{
+
+metrics <- GetMetrics("zwitchdev")
+metrics.nodf <- GetMetrics("zwitchdev", as.data.frame = FALSE)
+metricspv <- GetMetrics("zwitchdev", "pageviews")
+metricspv.nodf <- GetMetrics("zwitchdev", "pageviews", as.data.frame = FALSE)
+
+}
 }

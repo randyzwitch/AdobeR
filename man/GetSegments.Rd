@@ -7,8 +7,22 @@
 GetSegments(id = NULL, as.data.frame = TRUE)
 }
 \arguments{
-\item{as.data.frame}{}
+\item{id}{(character) Segment ID to retrieve}
+
+\item{as.data.frame}{(logical) Return result as data.frame}
+}
+\value{
+data.frame or S3 (Segments | Segment)
 }
 \description{
 GetSegments
+}
+\examples{
+\dontrun{
+seg <- GetSegments()
+seg.nodf <- GetSegments(as.data.frame = FALSE)
+segid <- GetSegments("5433e4e6e4b02df70be4ac63")
+segid.nodf <- GetSegments("5433e4e6e4b02df70be4ac63", FALSE)
+
+}
 }
