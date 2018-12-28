@@ -28,7 +28,7 @@ GetDateRanges <- function(dateRangeId=NULL, as.data.frame=TRUE) {
     resource <- paste(resource, "/", dateRangeId, sep="")
   }
 
-  r <- adobe_get(endpoint, resource, AdobeRInternals$auth, globalCompanyId)
+  r <- adobe_get(endpoint, resource, globalCompanyId)
 
   #Set S3 method for easier parsing later
   if(is.null(dateRangeId)){

@@ -29,7 +29,7 @@ GetMetrics <- function(rsid, metric=NULL, as.data.frame=TRUE) {
     endpoint <- paste(endpoint, "/", metric, sep="")
   }
 
-  r <- adobe_get(endpoint, resource, AdobeRInternals$auth, globalCompanyId)
+  r <- adobe_get(endpoint, resource, globalCompanyId)
 
   #Set S3 method for easier parsing later
   if(is.null(metric)){

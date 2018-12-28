@@ -27,7 +27,7 @@ GetDimensions <- function(rsid, dimension=NULL, as.data.frame=TRUE) {
     endpoint <- paste(endpoint, "/", dimension, sep="")
   }
 
-  r <- adobe_get(endpoint, resource, AdobeRInternals$auth, globalCompanyId)
+  r <- adobe_get(endpoint, resource, globalCompanyId)
 
   #Set S3 method for easier parsing later
   if(is.null(dimension)){

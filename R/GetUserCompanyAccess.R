@@ -15,8 +15,7 @@
 GetUserCompanyAccess <- function(as.data.frame=TRUE) {
   r <-
     adobe_get("https://analytics.adobe.io",
-              "/discovery/me",
-              AdobeRInternals$auth)
+              "/discovery/me")
 
   #Set S3 method for easier parsing later
   class(r) <- "CompanyAccess"

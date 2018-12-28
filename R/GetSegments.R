@@ -27,7 +27,7 @@ GetSegments <- function(id=NULL, as.data.frame=TRUE) {
     resource <- paste(resource, "/", id, sep="")
   }
 
-  r <- adobe_get(endpoint, resource, AdobeRInternals$auth, globalCompanyId)
+  r <- adobe_get(endpoint, resource, globalCompanyId)
 
   #Set S3 method for easier parsing later
   if(is.null(id)){

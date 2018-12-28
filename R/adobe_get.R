@@ -1,6 +1,6 @@
 #' @export
 #' @keywords internal
-adobe_get <- function(baseurl, endpoint, auth, globalCompanyId = NULL) {
+adobe_get <- function(baseurl, endpoint, globalCompanyId = NULL) {
   #TODO: Input validation
 
   #Set headers
