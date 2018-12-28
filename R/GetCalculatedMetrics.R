@@ -1,6 +1,5 @@
 #' GetCalculatedMetrics
 #'
-#' @param globalCompanyId
 #' @param id
 #' @param as.data.frame
 #'
@@ -8,7 +7,9 @@
 #' @export
 #'
 #' @examples
-GetCalculatedMetrics <- function(globalCompanyId, id=NULL, as.data.frame=TRUE) {
+GetCalculatedMetrics <- function(id=NULL, as.data.frame=TRUE) {
+
+  globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s", globalCompanyId)
   resource <- "/calculatedmetrics"
