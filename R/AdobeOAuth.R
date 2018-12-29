@@ -44,12 +44,14 @@ AdobeOAuth <- function(key,
   assign("auth", auth, envir = AdobeRInternals)
 
   #If user-specifies globalCompanyId, then store it
-  #Otherwise, get the id by calling GetUserCompanyAccess
+  #Otherwise, get the id by calling GetUserCompanyAccess and take first row
+  #Assumption is that first row will be only row for most; if more than one row
+  #user should've specified or gets the one automatically chosen
   if(!is.null(globalCompanyId)){
     assign("globalCompanyId", globalCompanyId, envir = AdobeRInternals)
   } else {
     guca <- GetUserCompanyAccess()
-    assign("globalCompanyId", guca$globalCompanyId, envir = AdobeRInternals)
+    assign("globalCompanyId", guca[1,]$globalCompanyId, envir = AdobeRInternals)
   }
 
 }
