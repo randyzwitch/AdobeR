@@ -1,6 +1,6 @@
 #' @export
 #' @keywords internal
-adobe_get <- function(baseurl, endpoint, globalCompanyId = NULL) {
+adobe_get <- function(endpoint, resource, globalCompanyId = NULL, query = NULL) {
   #TODO: Input validation
 
   #Set headers
@@ -16,10 +16,10 @@ adobe_get <- function(baseurl, endpoint, globalCompanyId = NULL) {
   }
 
   #Build URL
-  fullURL <- paste(baseurl, endpoint, sep = "")
+  fullURL <- paste(endpoint, resource, sep = "")
 
   #Make API call
-  r <- httr::GET(fullURL, httr::add_headers(headers))
+  r <- httr::GET(fullURL, httr::add_headers(headers), query = query)
 
   #TODO: check response code, proceed differently based on code
 

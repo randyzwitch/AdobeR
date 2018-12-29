@@ -23,13 +23,18 @@ GetMetrics <- function(rsid, metric=NULL, as.data.frame=TRUE) {
   endpoint <- sprintf("https://analytics.adobe.io/api/%s/metrics",
                       globalCompanyId)
 
-  resource <- paste("?rsid=", rsid, sep="")
-
   if(!is.null(metric)){
     endpoint <- paste(endpoint, "/", metric, sep="")
   }
 
-  r <- adobe_get(endpoint, resource, globalCompanyId)
+  #resource can stay empty, as dimensions built into endpoint string
+  resource <- ""
+
+  #pass query parameters as named list to httr rather than
+  #build string using paste
+  query <- list(rsid=rsid)
+
+  r <- adobe_get(endpoint, resource, globalCompanyId, query)
 
   #Set S3 method for easier parsing later
   if(is.null(metric)){
