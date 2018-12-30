@@ -4,12 +4,16 @@
 \alias{GetUsers}
 \title{GetUsers}
 \usage{
-GetUsers(id = NULL, as.data.frame = TRUE)
+GetUsers(id = NULL, as.data.frame = TRUE, limit = 100, page = 0)
 }
 \arguments{
 \item{id}{(character) ID of user you want to retrieve}
 
 \item{as.data.frame}{(logical) Return result as data.frame}
+
+\item{limit}{(integer) Number of results per page}
+
+\item{page}{(integer) Page number (base 0 - first page is "0")}
 }
 \value{
 data.frame or S3 (Users | User)
