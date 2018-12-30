@@ -2,6 +2,8 @@
 #'
 #' @param id (character) ID of user you want to retrieve
 #' @param as.data.frame (logical) Return result as data.frame
+#' @param limit (integer) Number of results per page
+#' @param page (integer) Page number (base 0 - first page is "0")
 #'
 #' @return data.frame or S3 (Users | User)
 #' @export
@@ -15,7 +17,10 @@
 #' userme.nodf <- GetUsers("me", as.data.frame = FALSE)
 #'
 #' }
-GetUsers <- function(id=NULL, as.data.frame=TRUE) {
+GetUsers <- function(id=NULL,
+                     as.data.frame=TRUE,
+                     limit=100,
+                     page=0) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
@@ -28,7 +33,9 @@ GetUsers <- function(id=NULL, as.data.frame=TRUE) {
     resource <- paste(resource, "/", id, sep="")
   }
 
-  r <- adobe_get(endpoint, resource, globalCompanyId)
+  query <- list(limit=limit, page=page)
+
+  r <- adobe_get(endpoint, resource, globalCompanyId, query)
 
   #Set S3 method for easier parsing later
   if(is.null(id)){

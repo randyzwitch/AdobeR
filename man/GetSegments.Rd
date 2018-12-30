@@ -4,12 +4,33 @@
 \alias{GetSegments}
 \title{GetSegments}
 \usage{
-GetSegments(id = NULL, as.data.frame = TRUE)
+GetSegments(id = NULL, as.data.frame = TRUE, rsids = NULL,
+  segmentFilter = NULL, locale = NULL, name = NULL,
+  tagNames = NULL, limit = 100, page = 0, expansion = NULL)
 }
 \arguments{
 \item{id}{(character) Segment ID to retrieve}
 
 \item{as.data.frame}{(logical) Return result as data.frame}
+
+\item{rsids}{(character) Only include segments tied to specified RSID list
+(comma-delimited)}
+
+\item{segmentFilter}{(character) Only include segments in the specified list
+(comma-delimited list of IDs)}
+
+\item{locale}{(character) Locale for encoding/localized spelling}
+
+\item{name}{(character) Only include segments that contains the name}
+
+\item{tagNames}{(character) Only include segments that contains one of the tags}
+
+\item{limit}{(integer) Number of results per page}
+
+\item{page}{(integer) Page number (base 0 - first page is "0")}
+
+\item{expansion}{(character) Comma-delimited list of additional metadata
+fields to include on response}
 }
 \value{
 data.frame or S3 (Segments | Segment)

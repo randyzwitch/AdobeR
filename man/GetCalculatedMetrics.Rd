@@ -4,12 +4,38 @@
 \alias{GetCalculatedMetrics}
 \title{GetCalculatedMetrics}
 \usage{
-GetCalculatedMetrics(id = NULL, as.data.frame = TRUE)
+GetCalculatedMetrics(id = NULL, as.data.frame = TRUE, rsids = NULL,
+  ownerId = NULL, calculatedMetricFilter = NULL, locale = NULL,
+  name = NULL, tagNames = NULL, limit = 100, page = 0,
+  expansion = NULL)
 }
 \arguments{
 \item{id}{(character) The calculated metric ID to retrieve}
 
 \item{as.data.frame}{(logical) Return result as data.frame}
+
+\item{rsids}{(character) Only include calculated metrics tied to specified
+RSID list (comma-delimited)}
+
+\item{ownerId}{(integer) Only include calculated metrics owned by the
+specified loginId}
+
+\item{calculatedMetricFilter}{(character) Only include calculated metrics in
+the specified list (comma-delimited list of IDs)}
+
+\item{locale}{(character) Locale for encoding/localized spelling}
+
+\item{name}{(character) Only include calculated metrics that contains the Name}
+
+\item{tagNames}{(character) Only include calculated metrics that contains
+one of the tags}
+
+\item{limit}{(integer) Number of results per page}
+
+\item{page}{(integer) Page number (base 0 - first page is "0")}
+
+\item{expansion}{(character) Comma-delimited list of additional calculated
+metric metadata fields to include on response}
 }
 \value{
 data.frame or S3 (CalculatedMetric | CalculatedMetrics)

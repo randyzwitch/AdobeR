@@ -4,7 +4,9 @@
 \alias{GetDimensions}
 \title{GetDimensions}
 \usage{
-GetDimensions(rsid, dimension = NULL, as.data.frame = TRUE)
+GetDimensions(rsid, dimension = NULL, as.data.frame = TRUE,
+  locale = NULL, segmentable = NULL, reportable = NULL,
+  classifiable = NULL, expansion = NULL)
 }
 \arguments{
 \item{rsid}{(character) The report suite ID}
@@ -12,6 +14,18 @@ GetDimensions(rsid, dimension = NULL, as.data.frame = TRUE)
 \item{dimension}{(character) The dimension ID}
 
 \item{as.data.frame}{(logical) Return result as data.frame}
+
+\item{locale}{(character) Locale for encoding/localized spelling}
+
+\item{segmentable}{(logical) Only include dimensions that are valid within a
+segment}
+
+\item{reportable}{(logical) Only include dimensions that are valid within a
+report}
+
+\item{classifiable}{(logical) Only include classifiable dimensions}
+
+\item{expansion}{(character) Add extra metadata to items (comma-delimited list)}
 }
 \value{
 data.frame or S3 (Dimensions | Dimension)

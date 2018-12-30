@@ -18,7 +18,7 @@
 AdobeOAuth <- function(key,
                        secret,
                        globalCompanyId=NULL,
-                       scope="openid,AdobeID,read_organizations,additional_info.job_function,additional_info.projectedProductContext",
+                       scope=NULL,
                        authfile=".httr-oauth") {
 
   #TODO: Input validation
@@ -26,6 +26,11 @@ AdobeOAuth <- function(key,
   #TODO: If authfile exists, test if it works or expired. If expired, refresh
 
   #ELSE: run build code below
+
+  if(is.null(scope)){
+    scope <- "openid,AdobeID,read_organizations,additional_info.job_function,additional_info.projectedProductContext"
+  }
+
   adobe_endpoints <- httr::oauth_endpoint(
                     authorize = sprintf("https://ims-na1.adobelogin.com/ims/authorize/v1?client_id=%s&scope=%s&response_type=code", key, scope),
                     access = "https://ims-na1.adobelogin.com/ims/token/v1"
