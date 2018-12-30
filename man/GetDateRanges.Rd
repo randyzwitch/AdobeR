@@ -4,12 +4,26 @@
 \alias{GetDateRanges}
 \title{GetDateRanges}
 \usage{
-GetDateRanges(dateRangeId = NULL, as.data.frame = TRUE)
+GetDateRanges(dateRangeId = NULL, as.data.frame = TRUE,
+  locale = NULL, filterByIds = NULL, limit = 100, page = 0,
+  expansion = NULL)
 }
 \arguments{
 \item{dateRangeId}{(character) The DateRange id for which to retrieve information}
 
 \item{as.data.frame}{(logical) Return result as data.frame}
+
+\item{locale}{(character) Locale for encoding/localized spelling}
+
+\item{filterByIds}{(character) Only include date ranges in the specified
+list (comma-delimited list of IDs)}
+
+\item{limit}{(integer) Number of results per page}
+
+\item{page}{(integer) Page number (base 0 - first page is "0")}
+
+\item{expansion}{(character) Comma-delimited list of additional date range
+metadata fields to include on response}
 }
 \value{
 data.frame or S3 (DateRanges | DateRange)

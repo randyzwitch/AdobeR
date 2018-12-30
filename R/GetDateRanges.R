@@ -2,6 +2,13 @@
 #'
 #' @param dateRangeId (character) The DateRange id for which to retrieve information
 #' @param as.data.frame (logical) Return result as data.frame
+#' @param locale (character) Locale for encoding/localized spelling
+#' @param filterByIds (character) Only include date ranges in the specified
+#'   list (comma-delimited list of IDs)
+#' @param limit (integer) Number of results per page
+#' @param page (integer) Page number (base 0 - first page is "0")
+#' @param expansion (character) Comma-delimited list of additional date range
+#'   metadata fields to include on response
 #'
 #' @return data.frame or S3 (DateRanges | DateRange)
 #' @export
@@ -15,7 +22,13 @@
 #' gdrid.nodf <- GetDateRanges("5c16f34fc66baa47fdd93804", as.data.frame = FALSE)
 #'
 #' }
-GetDateRanges <- function(dateRangeId=NULL, as.data.frame=TRUE) {
+GetDateRanges <- function(dateRangeId=NULL,
+                          as.data.frame=TRUE,
+                          locale=NULL,
+                          filterByIds=NULL,
+                          limit=100,
+                          page=0,
+                          expansion=NULL) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
@@ -28,7 +41,13 @@ GetDateRanges <- function(dateRangeId=NULL, as.data.frame=TRUE) {
     resource <- paste(resource, "/", dateRangeId, sep="")
   }
 
-  r <- adobe_get(endpoint, resource, globalCompanyId)
+  query <- list(locale=locale,
+                filterByIds=filterByIds,
+                limit=limit,
+                page=page,
+                expansion=expansion)
+
+  r <- adobe_get(endpoint, resource, globalCompanyId, query)
 
   #Set S3 method for easier parsing later
   if(is.null(dateRangeId)){
