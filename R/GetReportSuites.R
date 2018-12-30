@@ -2,6 +2,14 @@
 #'
 #' @param rsid (character) ID of desired report suite
 #' @param as.data.frame (logical) Return result as data.frame
+#' @param rsids (character) Only include suites in this RSID list
+#'   (comma-delimited)
+#' @param rsidContains (character) Only include suites whose rsid contains
+#'   rsidContains
+#' @param limit (integer) Number of results per page
+#' @param page (integer) Page number (base 0 - first page is "0")
+#' @param expansion (character) Comma-delimited list of additional metadata
+#'   fields to include on response
 #'
 #' @return data.frame or S3 (ReportSuites | ReportSuite)
 #' @export
@@ -14,7 +22,13 @@
 #' grsrsid.nodf <- GetReportSuites("zwitchdev", as.data.frame = FALSE)
 #'
 #' }
-GetReportSuites <- function(rsid=NULL, as.data.frame=TRUE) {
+GetReportSuites <- function(rsid=NULL,
+                            as.data.frame=TRUE,
+                            rsids=NULL,
+                            rsidContains=NULL,
+                            limit=100,
+                            page=0,
+                            expansion=NULL) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
@@ -26,7 +40,14 @@ GetReportSuites <- function(rsid=NULL, as.data.frame=TRUE) {
     resource <- paste(resource, "/", rsid, sep="")
   }
 
-  r <- adobe_get(endpoint, resource, globalCompanyId)
+  query <- list(rsids=rsids,
+                rsidContains=rsidContains,
+                limit=limit,
+                page=page,
+                expansion=expansion
+                )
+
+  r <- adobe_get(endpoint, resource, globalCompanyId, query)
 
   #Set S3 method for easier parsing later
   if(is.null(rsid)){
