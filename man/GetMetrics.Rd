@@ -4,7 +4,8 @@
 \alias{GetMetrics}
 \title{GetMetrics}
 \usage{
-GetMetrics(rsid, metric = NULL, as.data.frame = TRUE)
+GetMetrics(rsid, metric = NULL, as.data.frame = TRUE, locale = NULL,
+  segmentable = NULL, expansion = NULL)
 }
 \arguments{
 \item{rsid}{(character) ID of desired report suite}
@@ -12,6 +13,12 @@ GetMetrics(rsid, metric = NULL, as.data.frame = TRUE)
 \item{metric}{(character) ID of the metric for which to retrieve info}
 
 \item{as.data.frame}{(logical) Return result as data.frame}
+
+\item{locale}{(character) Locale for encoding/localized spelling}
+
+\item{segmentable}{(logical) Filter the metrics by if they are valid in a segment}
+
+\item{expansion}{(character) Add extra metadata to items (comma-delimited list)}
 }
 \value{
 data.frame or S3 (Metrics | Metric)

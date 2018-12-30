@@ -3,6 +3,9 @@
 #' @param rsid (character) ID of desired report suite
 #' @param metric (character) ID of the metric for which to retrieve info
 #' @param as.data.frame (logical) Return result as data.frame
+#' @param locale (character) Locale for encoding/localized spelling
+#' @param segmentable (logical) Filter the metrics by if they are valid in a segment
+#' @param expansion (character) Add extra metadata to items (comma-delimited list)
 #'
 #' @return data.frame or S3 (Metrics | Metric)
 #' @export
@@ -16,7 +19,12 @@
 #' metricspv.nodf <- GetMetrics("zwitchdev", "pageviews", as.data.frame = FALSE)
 #'
 #' }
-GetMetrics <- function(rsid, metric=NULL, as.data.frame=TRUE) {
+GetMetrics <- function(rsid,
+                       metric=NULL,
+                       as.data.frame=TRUE,
+                       locale=NULL,
+                       segmentable=NULL,
+                       expansion=NULL) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
@@ -32,7 +40,11 @@ GetMetrics <- function(rsid, metric=NULL, as.data.frame=TRUE) {
 
   #pass query parameters as named list to httr rather than
   #build string using paste
-  query <- list(rsid=rsid)
+  query <- list(rsid=rsid,
+                locale=locale,
+                segmentable=segmentable,
+                expansion=expansion
+                )
 
   r <- adobe_get(endpoint, resource, globalCompanyId, query)
 
