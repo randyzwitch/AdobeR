@@ -2,6 +2,17 @@
 #'
 #' @param id (character) Segment ID to retrieve
 #' @param as.data.frame (logical) Return result as data.frame
+#' @param rsids (character) Only include segments tied to specified RSID list
+#'   (comma-delimited)
+#' @param segmentFilter (character) Only include segments in the specified list
+#'   (comma-delimited list of IDs)
+#' @param locale (character) Locale for encoding/localized spelling
+#' @param name (character) Only include segments that contains the name
+#' @param tagNames (character) Only include segments that contains one of the tags
+#' @param limit (integer) Number of results per page
+#' @param page (integer) Page number (base 0 - first page is "0")
+#' @param expansion (character) Comma-delimited list of additional metadata
+#'   fields to include on response
 #'
 #' @return data.frame or S3 (Segments | Segment)
 #' @export
@@ -14,7 +25,16 @@
 #' segid.nodf <- GetSegments("5433e4e6e4b02df70be4ac63", FALSE)
 #'
 #' }
-GetSegments <- function(id=NULL, as.data.frame=TRUE) {
+GetSegments <- function(id=NULL,
+                        as.data.frame=TRUE,
+                        rsids=NULL,
+                        segmentFilter=NULL,
+                        locale=NULL,
+                        name=NULL,
+                        tagNames=NULL,
+                        limit=100,
+                        page=0,
+                        expansion=NULL) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
@@ -27,7 +47,16 @@ GetSegments <- function(id=NULL, as.data.frame=TRUE) {
     resource <- paste(resource, "/", id, sep="")
   }
 
-  r <- adobe_get(endpoint, resource, globalCompanyId)
+  query <- list(rsids=rsids,
+                segmentFilter=segmentFilter,
+                locale=locale,
+                name=name,
+                tagNames=tagNames,
+                limit=limit,
+                page=page,
+                expansion=expansion)
+
+  r <- adobe_get(endpoint, resource, globalCompanyId, query)
 
   #Set S3 method for easier parsing later
   if(is.null(id)){
