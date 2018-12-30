@@ -3,6 +3,13 @@
 #' @param rsid (character) The report suite ID
 #' @param dimension (character) The dimension ID
 #' @param as.data.frame (logical) Return result as data.frame
+#' @param locale (character) Locale for encoding/localized spelling
+#' @param segmentable (logical) Only include dimensions that are valid within a
+#'   segment
+#' @param reportable (logical) Only include dimensions that are valid within a
+#'   report
+#' @param classifiable (logical) Only include classifiable dimensions
+#' @param expansion (character) Add extra metadata to items (comma-delimited list)
 #'
 #' @return data.frame or S3 (Dimensions | Dimension)
 #' @export
@@ -15,7 +22,15 @@
 #' dimsevar1.nodf <- GetDimensions("zwitchdev", "evar1", as.data.frame = FALSE)
 #'
 #' }
-GetDimensions <- function(rsid, dimension=NULL, as.data.frame=TRUE) {
+GetDimensions <- function(rsid,
+                          dimension=NULL,
+                          as.data.frame=TRUE,
+                          locale=NULL,
+                          segmentable=NULL,
+                          reportable=NULL,
+                          classifiable=NULL,
+                          expansion=NULL
+                          ) {
 
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
@@ -31,7 +46,12 @@ GetDimensions <- function(rsid, dimension=NULL, as.data.frame=TRUE) {
 
   #pass query parameters as named list to httr rather than
   #build string using paste
-  query <- list(rsid=rsid)
+  query <- list(rsid=rsid,
+                locale=locale,
+                segmentable=segmentable,
+                reportable=reportable,
+                classifiable=classifiable,
+                expansion=expansion)
 
   r <- adobe_get(endpoint, resource, globalCompanyId, query)
 
