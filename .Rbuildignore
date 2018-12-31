@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^\.httr-oauth$
 devscript.R
+service.profile
