@@ -6,6 +6,9 @@
 \usage{
 GetUserCompanyAccess(as.data.frame = TRUE)
 }
+\arguments{
+\item{as.data.frame}{(logical) Return result as data.frame}
+}
 \value{
 data.frame or S3 object of class "CompanyAccess"
 }

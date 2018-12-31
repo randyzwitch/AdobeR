@@ -1,5 +1,5 @@
-#' @export
 #' @keywords internal
+#' @noRd
 adobe_get <- function(endpoint, resource, globalCompanyId = NULL, query = NULL) {
   #TODO: Input validation
 

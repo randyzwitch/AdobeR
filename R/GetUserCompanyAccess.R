@@ -2,6 +2,8 @@
 #'
 #' @title Companies user id can access
 #'
+#' @param as.data.frame (logical) Return result as data.frame
+#'
 #' @return data.frame or S3 object of class "CompanyAccess"
 #' @export
 #'
@@ -26,27 +28,4 @@ GetUserCompanyAccess <- function(as.data.frame=TRUE) {
   }
 
   return(r)
-}
-
-
-#' @export
-#' @keywords internal
-as.data.frame.CompanyAccess <- function(x) {
-  temp <- x[[2]]
-
-  df <- cbind(
-    temp$imsUserId,
-    temp$imsOrgs$imsOrgId,
-    temp$imsOrgs$companies[[1]],
-    stringsAsFactors = FALSE
-  )
-
-  names(df) <- c("imsUserId",
-                 "imsOrgId",
-                 "globalCompanyId",
-                 "companyName",
-                 "apiRateLimitPolicy")
-
-  return(df)
-
 }

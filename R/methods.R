@@ -2,42 +2,42 @@
 
 #' @export
 #' @keywords internal
-as.data.frame.CalculatedMetrics <- function(x) x$response$content
+as.data.frame.CalculatedMetrics <- function(x, ...) x$response$content
 
 #' @export
 #' @keywords internal
-as.data.frame.Dimensions <- function(x) x$response
+as.data.frame.Dimensions <- function(x, ...) x$response
 
 #' @export
 #' @keywords internal
-as.data.frame.ReportSuites <- function(x) x$response$content
+as.data.frame.ReportSuites <- function(x, ...) x$response$content
 
 #' @export
 #' @keywords internal
-as.data.frame.Segments <- function(x) x$response$content
+as.data.frame.Segments <- function(x, ...) x$response$content
 
 #' @export
 #' @keywords internal
-as.data.frame.Tags <- function(x) x$response$content
+as.data.frame.Tags <- function(x, ...) x$response$content
 
 #' @export
 #' @keywords internal
-as.data.frame.Users <- function(x) x$response$content
+as.data.frame.Users <- function(x, ...) x$response$content
 
 #' @export
 #' @keywords internal
-as.data.frame.Metrics <- function(x) x$response
+as.data.frame.Metrics <- function(x, ...) x$response
 
 #' @export
 #' @keywords internal
-as.data.frame.DateRanges <- function(x) x$response$content
+as.data.frame.DateRanges <- function(x, ...) x$response$content
 
 
 ##### as.data.frame methods for S3 classes that need custom df logic
 
 #' @export
 #' @keywords internal
-as.data.frame.CalculatedMetric <- function(x) {
+as.data.frame.CalculatedMetric <- function(x, ...) {
 
   #Defensively change any NULL values to NA
   #This is an issue with some methods that silently drop NULL in lists
@@ -54,7 +54,7 @@ as.data.frame.CalculatedMetric <- function(x) {
 
 #' @export
 #' @keywords internal
-as.data.frame.Dimension <- function(x) {
+as.data.frame.Dimension <- function(x, ...) {
 
   #Defensively change any NULL values to NA
   #This is an issue with some methods that silently drop NULL in lists
@@ -71,7 +71,7 @@ as.data.frame.Dimension <- function(x) {
 
 #' @export
 #' @keywords internal
-as.data.frame.ReportSuite <- function(x) {
+as.data.frame.ReportSuite <- function(x, ...) {
 
   #Defensively change any NULL values to NA
   #This is an issue with some methods that silently drop NULL in lists
@@ -87,7 +87,7 @@ as.data.frame.ReportSuite <- function(x) {
 
 #' @export
 #' @keywords internal
-as.data.frame.Segment <- function(x) {
+as.data.frame.Segment <- function(x, ...) {
 
   #Defensively change any NULL values to NA
   #This is an issue with some methods that silently drop NULL in lists
@@ -103,7 +103,7 @@ as.data.frame.Segment <- function(x) {
 
 #' @export
 #' @keywords internal
-as.data.frame.Tag <- function(x) {
+as.data.frame.Tag <- function(x, ...) {
 
   #Defensively change any NULL values to NA
   #This is an issue with some methods that silently drop NULL in lists
@@ -119,7 +119,7 @@ as.data.frame.Tag <- function(x) {
 
 #' @export
 #' @keywords internal
-as.data.frame.User <- function(x) {
+as.data.frame.User <- function(x, ...) {
 
   #Defensively change any NULL values to NA
   #This is an issue with some methods that silently drop NULL in lists
@@ -137,7 +137,7 @@ as.data.frame.User <- function(x) {
 
 #' @export
 #' @keywords internal
-as.data.frame.Metric <- function(x) {
+as.data.frame.Metric <- function(x, ...) {
 
   #Defensively change any NULL values to NA
   #This is an issue with some methods that silently drop NULL in lists
@@ -155,7 +155,7 @@ as.data.frame.Metric <- function(x) {
 
 #' @export
 #' @keywords internal
-as.data.frame.DateRange <- function(x) {
+as.data.frame.DateRange <- function(x, ...) {
 
   #Defensively change any NULL values to NA
   #This is an issue with some methods that silently drop NULL in lists
@@ -166,3 +166,26 @@ as.data.frame.DateRange <- function(x) {
   return(df)
 
 }
+
+#' @export
+#' @keywords internal
+as.data.frame.CompanyAccess <- function(x, ...) {
+  temp <- x[[2]]
+
+  df <- cbind(
+    temp$imsUserId,
+    temp$imsOrgs$imsOrgId,
+    temp$imsOrgs$companies[[1]],
+    stringsAsFactors = FALSE
+  )
+
+  names(df) <- c("imsUserId",
+                 "imsOrgId",
+                 "globalCompanyId",
+                 "companyName",
+                 "apiRateLimitPolicy")
+
+  return(df)
+
+}
+

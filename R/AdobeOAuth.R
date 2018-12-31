@@ -14,6 +14,15 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' # get this from the adobe.io console
+#' key <- "e6e798e57ba67330b42061e722c420cb"
+#' secret <- "427bc850-714c-4bcg-857b-5b74e11206c6"
+#'
+#' #this triggers the OAuth 3-legged authentication via browser
+#' AdobeOAuth(key, secret)
+#'
+#' }
 #'
 AdobeOAuth <- function(key,
                        secret,
