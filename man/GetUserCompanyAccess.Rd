@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetUserCompanyAccess.R
 \name{GetUserCompanyAccess}
 \alias{GetUserCompanyAccess}
-\title{Companies user id can access}
+\title{Companies a user id can access}
 \usage{
 GetUserCompanyAccess(as.data.frame = TRUE)
 }
@@ -10,7 +10,7 @@ GetUserCompanyAccess(as.data.frame = TRUE)
 \item{as.data.frame}{(logical) Return result as data.frame}
 }
 \value{
-data.frame or S3 object of class "CompanyAccess"
+data.frame or S3 (CompanyAccess)
 }
 \description{
 Returns companies user can access, based on Token 2.0 credentials

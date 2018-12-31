@@ -1,4 +1,4 @@
-#' GetCalculatedMetrics
+#' Get calculated metrics defined in a given report suite(s)
 #'
 #' @param id (character) The calculated metric ID to retrieve
 #' @param as.data.frame (logical) Return result as data.frame

@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetDateRanges.R
 \name{GetDateRanges}
 \alias{GetDateRanges}
-\title{GetDateRanges}
+\title{Get user-defined date ranges for a company account}
 \usage{
 GetDateRanges(dateRangeId = NULL, as.data.frame = TRUE,
   locale = NULL, filterByIds = NULL, limit = 100, page = 0,
@@ -29,7 +29,7 @@ metadata fields to include on response}
 data.frame or S3 (DateRanges | DateRange)
 }
 \description{
-GetDateRanges
+Get user-defined date ranges for a company account
 }
 \examples{
 \dontrun{

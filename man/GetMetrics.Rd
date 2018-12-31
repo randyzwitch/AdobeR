@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetMetrics.R
 \name{GetMetrics}
 \alias{GetMetrics}
-\title{GetMetrics}
+\title{Get metrics (custom events and pre-defined) defined in a given report suite(s)}
 \usage{
 GetMetrics(rsid, metric = NULL, as.data.frame = TRUE, locale = NULL,
   segmentable = NULL, expansion = NULL)
@@ -24,7 +24,7 @@ GetMetrics(rsid, metric = NULL, as.data.frame = TRUE, locale = NULL,
 data.frame or S3 (Metrics | Metric)
 }
 \description{
-GetMetrics
+Get metrics (custom events and pre-defined) defined in a given report suite(s)
 }
 \examples{
 \dontrun{

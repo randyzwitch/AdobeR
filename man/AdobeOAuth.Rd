@@ -2,40 +2,58 @@
 % Please edit documentation in R/AdobeOAuth.R
 \name{AdobeOAuth}
 \alias{AdobeOAuth}
-\title{OAuth2 authentication for Adobe Analytics API}
+\title{OAuth2 web authentication}
 \usage{
 AdobeOAuth(key, secret, globalCompanyId = NULL, scope = NULL,
   authfile = ".httr-oauth")
 }
 \arguments{
-\item{key}{key}
+\item{key}{(character) API Key (Client ID) from adobe.io console}
 
-\item{secret}{secret}
+\item{secret}{(character) Client secret from adobe.io console}
 
-\item{globalCompanyId}{globalCompanyId}
+\item{globalCompanyId}{(character) Deisred globalCompanyId (defined by Adobe)
+to access}
 
-\item{scope}{scope}
+\item{scope}{(character) Access scopes for account}
 
-\item{authfile}{authfile}
+\item{authfile}{(character) File name for cached OAuth credentials}
 }
 \value{
-Token 2.0 R6 Class (httr)
+Token 2.0 R6 Class (httr) in 'AdobeRInternals' environment (hidden)
 }
 \description{
-Description
+Authenticates with Adobe Analytics API using pre-defined
+  OAuth integration at https://console.adobe.io. This style of authentication
+  requires the user to copy an authentication code and input it into the R
+  console, and as such, is not appropriate for automation or service accounts.
 }
 \details{
-Details
+For user convenience, this method calls GetUserCompanyAccess() after
+  doing the 3-legged OAuth authentication procedure in order to get the
+  globalCompanyId. As part of this convenience, the method assumes that a user
+  only has access to a single company.
+
+  If your email address has access to
+  multiple Adobe Analytics accounts AND the company you are interested in
+  accessing is not listed first in the GetUserCompanyAccess() response, you
+  can set the globalCompanyId in the AdobeOAuth function to the proper value.
 }
 \examples{
 \dontrun{
+
 # get this from the adobe.io console
 key <- "e6e798e57ba67330b42061e722c420cb"
 secret <- "427bc850-714c-4bcg-857b-5b74e11206c6"
 
-#this triggers the OAuth 3-legged authentication via browser
+# This triggers the OAuth 3-legged authentication via browser
+# A browser window will open to sign into Adobe, which will then re-direct
+# to url specified during integration registration step
 AdobeOAuth(key, secret)
 
 }
 
+}
+\seealso{
+\code{\link{GetUserCompanyAccess}}
 }

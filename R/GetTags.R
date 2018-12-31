@@ -1,4 +1,4 @@
-#' GetTags
+#' Get user-defined tags for a company account
 #'
 #' @param id (character) ID for tag to retrieve
 #' @param as.data.frame (logical) Return result as data.frame

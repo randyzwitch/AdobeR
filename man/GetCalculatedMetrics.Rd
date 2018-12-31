@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetCalculatedMetrics.R
 \name{GetCalculatedMetrics}
 \alias{GetCalculatedMetrics}
-\title{GetCalculatedMetrics}
+\title{Get calculated metrics defined in a given report suite(s)}
 \usage{
 GetCalculatedMetrics(id = NULL, as.data.frame = TRUE, rsids = NULL,
   ownerId = NULL, calculatedMetricFilter = NULL, locale = NULL,
@@ -41,7 +41,7 @@ metric metadata fields to include on response}
 data.frame or S3 (CalculatedMetric | CalculatedMetrics)
 }
 \description{
-GetCalculatedMetrics
+Get calculated metrics defined in a given report suite(s)
 }
 \examples{
 \dontrun{

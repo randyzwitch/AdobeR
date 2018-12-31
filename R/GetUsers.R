@@ -1,4 +1,4 @@
-#' GetUsers
+#' Get users for a company account
 #'
 #' @param id (character) ID of user you want to retrieve
 #' @param as.data.frame (logical) Return result as data.frame

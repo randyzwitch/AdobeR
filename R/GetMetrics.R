@@ -1,4 +1,4 @@
-#' GetMetrics
+#' Get metrics (custom events and pre-defined) defined in a given report suite(s)
 #'
 #' @param rsid (character) ID of desired report suite
 #' @param metric (character) ID of the metric for which to retrieve info

@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetReportSuites.R
 \name{GetReportSuites}
 \alias{GetReportSuites}
-\title{GetReportSuites}
+\title{Get report suites for a company account}
 \usage{
 GetReportSuites(rsid = NULL, as.data.frame = TRUE, rsids = NULL,
   rsidContains = NULL, limit = 100, page = 0, expansion = NULL)
@@ -29,7 +29,7 @@ fields to include on response}
 data.frame or S3 (ReportSuites | ReportSuite)
 }
 \description{
-GetReportSuites
+Get report suites for a company account
 }
 \examples{
 \dontrun{

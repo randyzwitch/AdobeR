@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetSegments.R
 \name{GetSegments}
 \alias{GetSegments}
-\title{GetSegments}
+\title{Get user-defined segments for a company account}
 \usage{
 GetSegments(id = NULL, as.data.frame = TRUE, rsids = NULL,
   segmentFilter = NULL, locale = NULL, name = NULL,
@@ -36,7 +36,7 @@ fields to include on response}
 data.frame or S3 (Segments | Segment)
 }
 \description{
-GetSegments
+Get user-defined segments for a company account
 }
 \examples{
 \dontrun{

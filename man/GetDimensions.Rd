@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetDimensions.R
 \name{GetDimensions}
 \alias{GetDimensions}
-\title{GetDimensions}
+\title{Get dimensions (props, eVars, etc.) defined in a given report suite(s)}
 \usage{
 GetDimensions(rsid, dimension = NULL, as.data.frame = TRUE,
   locale = NULL, segmentable = NULL, reportable = NULL,
@@ -31,7 +31,7 @@ report}
 data.frame or S3 (Dimensions | Dimension)
 }
 \description{
-GetDimensions
+Get dimensions (props, eVars, etc.) defined in a given report suite(s)
 }
 \examples{
 \dontrun{

@@ -1,10 +1,10 @@
-#' @description Returns companies user can access, based on Token 2.0 credentials
+#' Companies a user id can access
 #'
-#' @title Companies user id can access
+#' @description Returns companies user can access, based on Token 2.0 credentials
 #'
 #' @param as.data.frame (logical) Return result as data.frame
 #'
-#' @return data.frame or S3 object of class "CompanyAccess"
+#' @return data.frame or S3 (CompanyAccess)
 #' @export
 #'
 #' @seealso \code{\link{AdobeOAuth}}

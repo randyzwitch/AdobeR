@@ -1,4 +1,4 @@
-#' GetDimensions
+#' Get dimensions (props, eVars, etc.) defined in a given report suite(s)
 #'
 #' @param rsid (character) The report suite ID
 #' @param dimension (character) The dimension ID

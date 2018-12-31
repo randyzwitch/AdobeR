@@ -1,4 +1,4 @@
-#' GetDateRanges
+#' Get user-defined date ranges for a company account
 #'
 #' @param dateRangeId (character) The DateRange id for which to retrieve information
 #' @param as.data.frame (logical) Return result as data.frame

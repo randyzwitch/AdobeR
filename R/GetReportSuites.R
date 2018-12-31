@@ -1,4 +1,4 @@
-#' GetReportSuites
+#' Get report suites for a company account
 #'
 #' @param rsid (character) ID of desired report suite
 #' @param as.data.frame (logical) Return result as data.frame

@@ -1,4 +1,4 @@
-#' GetSegments
+#' Get user-defined segments for a company account
 #'
 #' @param id (character) Segment ID to retrieve
 #' @param as.data.frame (logical) Return result as data.frame

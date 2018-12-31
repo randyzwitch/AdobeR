@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetUsers.R
 \name{GetUsers}
 \alias{GetUsers}
-\title{GetUsers}
+\title{Get users for a company account}
 \usage{
 GetUsers(id = NULL, as.data.frame = TRUE, limit = 100, page = 0)
 }
@@ -19,7 +19,7 @@ GetUsers(id = NULL, as.data.frame = TRUE, limit = 100, page = 0)
 data.frame or S3 (Users | User)
 }
 \description{
-GetUsers
+Get users for a company account
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetTags.R
 \name{GetTags}
 \alias{GetTags}
-\title{GetTags}
+\title{Get user-defined tags for a company account}
 \usage{
 GetTags(id = NULL, as.data.frame = TRUE)
 }
@@ -15,7 +15,7 @@ GetTags(id = NULL, as.data.frame = TRUE)
 data.frame or S3 (Tags | Tag)
 }
 \description{
-GetTags
+Get user-defined tags for a company account
 }
 \examples{
 \dontrun{
