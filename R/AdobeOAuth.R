@@ -74,6 +74,7 @@ AdobeOAuth <- function(key,
   #Assign to AdobeRInternals environment, so that other functions know where auth located
   assign("auth", auth, envir = AdobeRInternals)
 
+
   #If user-specifies globalCompanyId, then store it
   #Otherwise, get the id by calling GetUserCompanyAccess and take first row
   #Assumption is that first row will be only row for most; if more than one row
