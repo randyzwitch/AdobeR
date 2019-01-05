@@ -63,7 +63,7 @@ AdobeOAuth <- function(key,
 
   adobe_endpoints <- httr::oauth_endpoint(
                     authorize = sprintf("https://ims-na1.adobelogin.com/ims/authorize/v1?client_id=%s&scope=%s&response_type=code", key, scope),
-                    access = "https://ims-na1.adobelogin.com/ims/token/v1"
+                    access = "https://ims-na1.adobelogin.com/ims/token/"
                     )
 
   #If .httr-oauth exists and key/secret hash in file, will skip the web auth
