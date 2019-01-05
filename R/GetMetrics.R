@@ -26,6 +26,19 @@ GetMetrics <- function(rsid,
                        segmentable=NULL,
                        expansion=NULL) {
 
+  assertthat::assert_that(is.character(rsid) || is.null(rsid),
+                          msg="rsid required to be class 'character'")
+  assertthat::assert_that(is.character(metric) || is.null(metric),
+                          msg="metric required to be class 'character'")
+  assertthat::assert_that(is.logical(as.data.frame),
+                          msg="as.data.frame required to be class 'logical'")
+  assertthat::assert_that(is.character(locale) || is.null(locale),
+                          msg="locale required to be class 'character'")
+  assertthat::assert_that(is.logical(segmentable) || is.null(segmentable),
+                          msg="segmentable required to be class 'logical'")
+  assertthat::assert_that(is.character(expansion) || is.null(expansion),
+                          msg="expansion required to be class 'character'")
+
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s/metrics",

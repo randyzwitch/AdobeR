@@ -47,7 +47,15 @@ AdobeOAuth <- function(key,
                        scope=NULL,
                        authfile=".httr-oauth") {
 
-  #TODO: Input validation
+  assertthat::assert_that(is.character(key),
+                          msg="key required to be class 'character'")
+  assertthat::assert_that(is.character(secret),
+                          msg="secret required to be class 'character'")
+  assertthat::assert_that(is.character(globalCompanyId) || is.null(globalCompanyId),
+                          msg="globalCompanyId required to be class 'character'")
+  assertthat::assert_that(is.character(scope) || is.null(scope),
+                          msg="scope required to be class 'character'")
+
   #TODO: Check if authfile exists. If so, don't build new one
   #TODO: If authfile exists, test if it works or expired. If expired, refresh
 
