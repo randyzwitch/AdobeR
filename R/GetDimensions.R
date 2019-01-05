@@ -32,7 +32,7 @@ GetDimensions <- function(rsid,
                           expansion=NULL
                           ) {
 
-  assertthat::assert_that(is.character(rsid) || is.null(rsid),
+  assertthat::assert_that(is.character(rsid),
                           msg="rsid required to be class 'character'")
   assertthat::assert_that(is.character(dimension) || is.null(dimension),
                           msg="dimension required to be class 'character'")

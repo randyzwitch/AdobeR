@@ -41,7 +41,7 @@ GetSegments <- function(id=NULL,
   assertthat::assert_that(is.logical(as.data.frame),
                           msg="as.data.frame required to be class 'logical'")
   assertthat::assert_that(is.character(rsids) || is.null(rsids),
-                          msg="rsid required to be class 'character'")
+                          msg="rsids required to be class 'character'")
   assertthat::assert_that(is.character(segmentFilter) || is.null(segmentFilter),
                           msg="segmentFilter required to be class 'character'")
   assertthat::assert_that(is.character(locale) || is.null(locale),

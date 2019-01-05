@@ -26,7 +26,7 @@ GetMetrics <- function(rsid,
                        segmentable=NULL,
                        expansion=NULL) {
 
-  assertthat::assert_that(is.character(rsid) || is.null(rsid),
+  assertthat::assert_that(is.character(rsid),
                           msg="rsid required to be class 'character'")
   assertthat::assert_that(is.character(metric) || is.null(metric),
                           msg="metric required to be class 'character'")

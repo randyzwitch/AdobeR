@@ -17,7 +17,7 @@
 GetUserCompanyAccess <- function(as.data.frame=TRUE) {
 
   assertthat::assert_that(is.logical(as.data.frame),
-              msg="as.data.frame required to be class 'logical'")
+                          msg="as.data.frame required to be class 'logical'")
 
   r <- adobe_get("https://analytics.adobe.io", "/discovery/me")
 
