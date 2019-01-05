@@ -44,6 +44,30 @@ GetCalculatedMetrics <- function(id=NULL,
                                  expansion=NULL
                                  ) {
 
+  assertthat::assert_that(is.character(id) || is.null(id),
+                          msg="id required to be class 'character'")
+  assertthat::assert_that(is.logical(as.data.frame),
+                          msg="as.data.frame required to be class 'logical'")
+  assertthat::assert_that(is.character(rsids) || is.null(rsids),
+                          msg="rsids required to be class 'character'")
+  assertthat::assert_that(is.character(ownerId) || is.null(ownerId),
+                          msg="ownerId required to be class 'character'")
+  assertthat::assert_that(is.character(calculatedMetricFilter) || is.null(calculatedMetricFilter),
+                          msg="calculatedMetricFilter required to be class 'character'")
+  assertthat::assert_that(is.character(locale) || is.null(locale),
+                          msg="locale required to be class 'character'")
+  assertthat::assert_that(is.character(name) || is.null(name),
+                          msg="name required to be class 'character'")
+  assertthat::assert_that(is.character(tagNames) || is.null(tagNames),
+                          msg="tagNames required to be class 'character'")
+  assertthat::assert_that(is.numeric(limit),
+                          msg="limit required to be class 'numeric' (integer)")
+  assertthat::assert_that(is.numeric(page),
+                          msg="page required to be class 'numeric' (integer)")
+  assertthat::assert_that(is.character(expansion) || is.null(expansion),
+                          msg="expansion required to be class 'character'")
+
+
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s", globalCompanyId)

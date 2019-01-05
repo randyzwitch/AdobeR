@@ -18,7 +18,7 @@ adobe_get <- function(endpoint, resource, globalCompanyId = NULL, query = NULL) 
 
   r <- httr::GET(fullURL, httr::add_headers(headers), query = query)
 
-  if(!http_error(r)){
+  if(!httr::http_error(r)){
 
     #representation as it came from API
     r_text <- httr::content(r, as = "text", encoding = "UTF-8")
@@ -32,7 +32,7 @@ adobe_get <- function(endpoint, resource, globalCompanyId = NULL, query = NULL) 
   } else {
 
     #TODO: check if token expired, refresh, then run again
-    print(http_status(r))
+    print(httr::http_status(r))
 
     #Check to see if Adobe returns an error message
     if(!is.null(parsed$errorCode)){

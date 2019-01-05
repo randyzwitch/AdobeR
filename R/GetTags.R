@@ -16,6 +16,11 @@
 #' }
 GetTags <- function(id=NULL, as.data.frame=TRUE) {
 
+  assertthat::assert_that(is.character(id) || is.null(id),
+                          msg="id required to be class 'character'")
+  assertthat::assert_that(is.logical(as.data.frame),
+                          msg="as.data.frame required to be class 'logical'")
+
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",

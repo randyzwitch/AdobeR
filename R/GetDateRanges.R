@@ -30,6 +30,23 @@ GetDateRanges <- function(dateRangeId=NULL,
                           page=0,
                           expansion=NULL) {
 
+  assertthat::assert_that(is.character(dateRangeId) || is.null(dateRangeId),
+                          msg="dateRangeId required to be class 'character'")
+  assertthat::assert_that(is.logical(as.data.frame),
+                          msg="as.data.frame required to be class 'logical'")
+  assertthat::assert_that(is.character(locale) || is.null(locale),
+                          msg="locale required to be class 'character'")
+  assertthat::assert_that(is.character(filterByIds) || is.null(filterByIds),
+                          msg="filterByIds required to be class 'character'")
+  assertthat::assert_that(is.numeric(limit),
+                          msg="limit required to be class 'numeric' (integer)")
+  assertthat::assert_that(is.numeric(page),
+                          msg="page required to be class 'numeric' (integer)")
+  assertthat::assert_that(is.character(expansion) || is.null(expansion),
+                          msg="expansion required to be class 'character'")
+
+
+
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",

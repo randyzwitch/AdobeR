@@ -30,6 +30,21 @@ GetReportSuites <- function(rsid=NULL,
                             page=0,
                             expansion=NULL) {
 
+  assertthat::assert_that(is.character(rsid) || is.null(rsid),
+                          msg="rsid required to be class 'character'")
+  assertthat::assert_that(is.logical(as.data.frame),
+                          msg="as.data.frame required to be class 'logical'")
+  assertthat::assert_that(is.character(rsids) || is.null(rsids),
+                          msg="rsids required to be class 'character'")
+  assertthat::assert_that(is.character(rsidContains) || is.null(rsidContains),
+                          msg="rsidContains required to be class 'character'")
+  assertthat::assert_that(is.numeric(limit),
+                          msg="limit required to be class 'numeric' (integer)")
+  assertthat::assert_that(is.numeric(page),
+                          msg="page required to be class 'numeric' (integer)")
+  assertthat::assert_that(is.character(expansion) || is.null(expansion),
+                          msg="expansion required to be class 'character'")
+
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",
