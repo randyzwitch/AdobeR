@@ -68,9 +68,9 @@ GetDateRanges <- function(dateRangeId=NULL,
 
   #Set S3 method for easier parsing later
   if(is.null(dateRangeId)){
-    class(r) <- "DateRanges"
+    class(r) <- append(class(r), "DateRanges")
   } else {
-    class(r) <- "DateRange"
+    class(r) <- append(class(r), "DateRange")
   }
 
   #Return a data.frame or just an S3 object

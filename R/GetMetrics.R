@@ -63,9 +63,9 @@ GetMetrics <- function(rsid,
 
   #Set S3 method for easier parsing later
   if(is.null(metric)){
-    class(r) <- "Metrics"
+    class(r) <- append(class(r), "Metrics")
   } else {
-    class(r) <- "Metric"
+    class(r) <- append(class(r), "Metric")
   }
 
   #Return a data.frame or just an S3 object

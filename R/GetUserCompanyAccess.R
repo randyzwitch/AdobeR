@@ -22,7 +22,7 @@ GetUserCompanyAccess <- function(as.data.frame=TRUE) {
   r <- adobe_get("https://analytics.adobe.io", "/discovery/me")
 
   #Set S3 method for easier parsing later
-  class(r) <- "CompanyAccess"
+  class(r) <- append(class(r), "CompanyAccess")
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){

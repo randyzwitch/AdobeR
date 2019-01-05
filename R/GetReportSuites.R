@@ -66,9 +66,9 @@ GetReportSuites <- function(rsid=NULL,
 
   #Set S3 method for easier parsing later
   if(is.null(rsid)){
-    class(r) <- "ReportSuites"
+    class(r) <- append(class(r), "ReportSuites")
   } else {
-    class(r) <- "ReportSuite"
+    class(r) <- append(class(r), "ReportSuite")
   }
 
   #Return a data.frame or just an S3 object

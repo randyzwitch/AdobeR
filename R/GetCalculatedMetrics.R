@@ -92,9 +92,9 @@ GetCalculatedMetrics <- function(id=NULL,
 
   #Set S3 method for easier parsing later
   if(is.null(id)){
-    class(r) <- "CalculatedMetrics"
+    class(r) <- append(class(r), "CalculatedMetrics")
   } else {
-    class(r) <- "CalculatedMetric"
+    class(r) <- append(class(r), "CalculatedMetric")
   }
 
   #Return a data.frame or just an S3 object

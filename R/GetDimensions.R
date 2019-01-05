@@ -72,9 +72,9 @@ GetDimensions <- function(rsid,
 
   #Set S3 method for easier parsing later
   if(is.null(dimension)){
-    class(r) <- "Dimensions"
+    class(r) <- append(class(r), "Dimensions")
   } else {
-    class(r) <- "Dimension"
+    class(r) <- append(class(r), "Dimension")
   }
 
   #Return a data.frame or just an S3 object

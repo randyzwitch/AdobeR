@@ -27,7 +27,10 @@ adobe_get <- function(endpoint, resource, globalCompanyId = NULL, query = NULL) 
     parsed <- jsonlite::fromJSON(r_text, simplifyDataFrame = TRUE, flatten = TRUE)
 
     #return original content, as well as the parsed response from jsonlite
-    return(list(json = r_text, response = parsed))
+    #mark class as AdobeRSuccess, check will allow for error checking elsewhere
+    returnval <- list(json = r_text, response = parsed)
+    class(returnval) <- "AdobeRSuccess"
+    return(returnval)
 
   } else {
 

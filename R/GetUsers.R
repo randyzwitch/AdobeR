@@ -48,9 +48,9 @@ GetUsers <- function(id=NULL,
 
   #Set S3 method for easier parsing later
   if(is.null(id)){
-    class(r) <- "Users"
+    class(r) <- append(class(r), "Users")
   } else {
-    class(r) <- "User"
+    class(r) <- append(class(r), "User")
   }
 
   #Return a data.frame or just an S3 object

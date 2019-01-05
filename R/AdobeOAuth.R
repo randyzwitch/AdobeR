@@ -56,11 +56,7 @@ AdobeOAuth <- function(key,
   assertthat::assert_that(is.character(scope) || is.null(scope),
                           msg="scope required to be class 'character'")
 
-  #TODO: Check if authfile exists. If so, don't build new one
-  #TODO: If authfile exists, test if it works or expired. If expired, refresh
-
-  #ELSE: run build code below
-
+  #If user doesn't specify, make scope wide as possible
   if(is.null(scope)){
     scope <- "openid,AdobeID,read_organizations,additional_info.job_function,additional_info.projectedProductContext"
   }
@@ -70,7 +66,8 @@ AdobeOAuth <- function(key,
                     access = "https://ims-na1.adobelogin.com/ims/token/v1"
                     )
 
-  #TODO: determine if these are always correct or should be function arguments
+  #If .httr-oauth exists and key/secret hash in file, will skip the web auth
+  #Process doesn't check for valid token though
   auth <- httr::oauth2.0_token(
     endpoint = adobe_endpoints,
     app = httr::oauth_app("adober", key, secret),
@@ -81,7 +78,6 @@ AdobeOAuth <- function(key,
 
   #Assign to AdobeRInternals environment, so that other functions know where auth located
   assign("auth", auth, envir = AdobeRInternals)
-
 
   #If user-specifies globalCompanyId, then store it
   #Otherwise, get the id by calling GetUserCompanyAccess and take first row

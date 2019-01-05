@@ -35,9 +35,9 @@ GetTags <- function(id=NULL, as.data.frame=TRUE) {
 
   #Set S3 method for easier parsing later
   if(is.null(id)){
-    class(r) <- "Tags"
+    class(r) <- append(class(r), "Tags")
   } else {
-    class(r) <- "Tag"
+    class(r) <- append(class(r), "Tag")
   }
 
   #Return a data.frame or just an S3 object

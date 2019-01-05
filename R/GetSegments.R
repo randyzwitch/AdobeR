@@ -81,9 +81,9 @@ GetSegments <- function(id=NULL,
 
   #Set S3 method for easier parsing later
   if(is.null(id)){
-    class(r) <- "Segments"
+    class(r) <- append(class(r), "Segments")
   } else {
-    class(r) <- "Segment"
+    class(r) <- append(class(r), "Segment")
   }
 
   #Return a data.frame or just an S3 object
