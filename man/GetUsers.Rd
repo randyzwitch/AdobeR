@@ -4,11 +4,9 @@
 \alias{GetUsers}
 \title{Get users for a company account}
 \usage{
-GetUsers(id = NULL, as.data.frame = TRUE, limit = 100, page = 0)
+GetUsers(as.data.frame = TRUE, limit = 100, page = 0)
 }
 \arguments{
-\item{id}{(character) ID of user you want to retrieve}
-
 \item{as.data.frame}{(logical) Return result as data.frame}
 
 \item{limit}{(integer) Number of results per page}
@@ -16,7 +14,7 @@ GetUsers(id = NULL, as.data.frame = TRUE, limit = 100, page = 0)
 \item{page}{(integer) Page number (base 0 - first page is "0")}
 }
 \value{
-data.frame or S3 (Users | User)
+data.frame or S3 'Users'
 }
 \description{
 Get users for a company account
@@ -26,8 +24,6 @@ Get users for a company account
 
 users <- GetUsers()
 users.nodf <- GetUsers(as.data.frame = FALSE) #returns S3 Users
-userme <- GetUsers("me")
-userme.nodf <- GetUsers("me", as.data.frame = FALSE)
 
 }
 }

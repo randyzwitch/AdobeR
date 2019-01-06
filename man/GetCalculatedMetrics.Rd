@@ -4,14 +4,12 @@
 \alias{GetCalculatedMetrics}
 \title{Get calculated metrics defined in a given report suite(s)}
 \usage{
-GetCalculatedMetrics(id = NULL, as.data.frame = TRUE, rsids = NULL,
+GetCalculatedMetrics(as.data.frame = TRUE, rsids = NULL,
   ownerId = NULL, calculatedMetricFilter = NULL, locale = NULL,
   name = NULL, tagNames = NULL, limit = 100, page = 0,
   expansion = NULL)
 }
 \arguments{
-\item{id}{(character) The calculated metric ID to retrieve}
-
 \item{as.data.frame}{(logical) Return result as data.frame}
 
 \item{rsids}{(character) Only include calculated metrics tied to specified
@@ -38,7 +36,7 @@ one of the tags}
 metric metadata fields to include on response}
 }
 \value{
-data.frame or S3 (CalculatedMetric | CalculatedMetrics)
+data.frame or S3 'CalculatedMetrics'
 }
 \description{
 Get calculated metrics defined in a given report suite(s)
@@ -46,12 +44,8 @@ Get calculated metrics defined in a given report suite(s)
 \examples{
 \dontrun{
 cm <- GetCalculatedMetrics()
-cmid <- GetCalculatedMetrics("cm300005752_557fc500e4b013edc2a85531")
 
-#returns S3 CalculatedMetrics
 cm.nodf <- GetCalculatedMetrics(as.data.frame=FALSE)
-#returns S3 CalculatedMetric
-cmid.nodf <- GetCalculatedMetrics("cm300005752_557fc500e4b013edc2a85531", as.data.frame = FALSE)
 
 }
 }

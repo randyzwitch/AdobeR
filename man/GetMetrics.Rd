@@ -4,13 +4,11 @@
 \alias{GetMetrics}
 \title{Get metrics (custom events and pre-defined) defined in a given report suite(s)}
 \usage{
-GetMetrics(rsid, metric = NULL, as.data.frame = TRUE, locale = NULL,
+GetMetrics(rsid, as.data.frame = TRUE, locale = NULL,
   segmentable = NULL, expansion = NULL)
 }
 \arguments{
 \item{rsid}{(character) ID of desired report suite}
-
-\item{metric}{(character) ID of the metric for which to retrieve info}
 
 \item{as.data.frame}{(logical) Return result as data.frame}
 
@@ -21,7 +19,7 @@ GetMetrics(rsid, metric = NULL, as.data.frame = TRUE, locale = NULL,
 \item{expansion}{(character) Add extra metadata to items (comma-delimited list)}
 }
 \value{
-data.frame or S3 (Metrics | Metric)
+data.frame or S3 'Metrics'
 }
 \description{
 Get metrics (custom events and pre-defined) defined in a given report suite(s)
@@ -31,8 +29,6 @@ Get metrics (custom events and pre-defined) defined in a given report suite(s)
 
 metrics <- GetMetrics("zwitchdev")
 metrics.nodf <- GetMetrics("zwitchdev", as.data.frame = FALSE)
-metricspv <- GetMetrics("zwitchdev", "pageviews")
-metricspv.nodf <- GetMetrics("zwitchdev", "pageviews", as.data.frame = FALSE)
 
 }
 }

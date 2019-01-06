@@ -4,13 +4,10 @@
 \alias{GetDateRanges}
 \title{Get user-defined date ranges for a company account}
 \usage{
-GetDateRanges(dateRangeId = NULL, as.data.frame = TRUE,
-  locale = NULL, filterByIds = NULL, limit = 100, page = 0,
-  expansion = NULL)
+GetDateRanges(as.data.frame = TRUE, locale = NULL,
+  filterByIds = NULL, limit = 100, page = 0, expansion = NULL)
 }
 \arguments{
-\item{dateRangeId}{(character) The DateRange id for which to retrieve information}
-
 \item{as.data.frame}{(logical) Return result as data.frame}
 
 \item{locale}{(character) Locale for encoding/localized spelling}
@@ -26,7 +23,7 @@ list (comma-delimited list of IDs)}
 metadata fields to include on response}
 }
 \value{
-data.frame or S3 (DateRanges | DateRange)
+data.frame or S3 'DateRanges'
 }
 \description{
 Get user-defined date ranges for a company account
@@ -36,8 +33,6 @@ Get user-defined date ranges for a company account
 
 gdr <- GetDateRanges()
 gdr.nodf <- GetDateRanges(as.data.frame = FALSE)
-gdrid <- GetDateRanges("5c16f34fc66baa47fdd93804")
-gdrid.nodf <- GetDateRanges("5c16f34fc66baa47fdd93804", as.data.frame = FALSE)
 
 }
 }

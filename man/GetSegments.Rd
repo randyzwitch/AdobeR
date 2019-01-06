@@ -4,13 +4,11 @@
 \alias{GetSegments}
 \title{Get user-defined segments for a company account}
 \usage{
-GetSegments(id = NULL, as.data.frame = TRUE, rsids = NULL,
-  segmentFilter = NULL, locale = NULL, name = NULL,
-  tagNames = NULL, limit = 100, page = 0, expansion = NULL)
+GetSegments(as.data.frame = TRUE, rsids = NULL, segmentFilter = NULL,
+  locale = NULL, name = NULL, tagNames = NULL, limit = 100,
+  page = 0, expansion = NULL)
 }
 \arguments{
-\item{id}{(character) Segment ID to retrieve}
-
 \item{as.data.frame}{(logical) Return result as data.frame}
 
 \item{rsids}{(character) Only include segments tied to specified RSID list
@@ -33,7 +31,7 @@ GetSegments(id = NULL, as.data.frame = TRUE, rsids = NULL,
 fields to include on response}
 }
 \value{
-data.frame or S3 (Segments | Segment)
+data.frame or S3 'Segments'
 }
 \description{
 Get user-defined segments for a company account
@@ -42,8 +40,6 @@ Get user-defined segments for a company account
 \dontrun{
 seg <- GetSegments()
 seg.nodf <- GetSegments(as.data.frame = FALSE)
-segid <- GetSegments("5433e4e6e4b02df70be4ac63")
-segid.nodf <- GetSegments("5433e4e6e4b02df70be4ac63", FALSE)
 
 }
 }

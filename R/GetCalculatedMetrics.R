@@ -1,6 +1,5 @@
 #' Get calculated metrics defined in a given report suite(s)
 #'
-#' @param id (character) The calculated metric ID to retrieve
 #' @param as.data.frame (logical) Return result as data.frame
 #' @param rsids (character) Only include calculated metrics tied to specified
 #'   RSID list (comma-delimited)
@@ -17,22 +16,17 @@
 #' @param expansion (character) Comma-delimited list of additional calculated
 #'   metric metadata fields to include on response
 #'
-#' @return data.frame or S3 (CalculatedMetric | CalculatedMetrics)
+#' @return data.frame or S3 'CalculatedMetrics'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' cm <- GetCalculatedMetrics()
-#' cmid <- GetCalculatedMetrics("cm300005752_557fc500e4b013edc2a85531")
 #'
-#' #returns S3 CalculatedMetrics
 #' cm.nodf <- GetCalculatedMetrics(as.data.frame=FALSE)
-#' #returns S3 CalculatedMetric
-#' cmid.nodf <- GetCalculatedMetrics("cm300005752_557fc500e4b013edc2a85531", as.data.frame = FALSE)
 #'
 #' }
-GetCalculatedMetrics <- function(id=NULL,
-                                 as.data.frame=TRUE,
+GetCalculatedMetrics <- function(as.data.frame=TRUE,
                                  rsids=NULL,
                                  ownerId=NULL,
                                  calculatedMetricFilter=NULL,
@@ -44,8 +38,6 @@ GetCalculatedMetrics <- function(id=NULL,
                                  expansion=NULL
                                  ) {
 
-  assertthat::assert_that(is.character(id) || is.null(id),
-                          msg="id required to be class 'character'")
   assertthat::assert_that(is.logical(as.data.frame),
                           msg="as.data.frame required to be class 'logical'")
   assertthat::assert_that(is.character(rsids) || is.null(rsids),
@@ -73,10 +65,6 @@ GetCalculatedMetrics <- function(id=NULL,
   endpoint <- sprintf("https://analytics.adobe.io/api/%s", globalCompanyId)
   resource <- "/calculatedmetrics"
 
-  if(!is.null(id)){
-    resource <- paste(resource, "/", id, sep="")
-  }
-
   query <- list(rsids=rsids,
                 ownerId=ownerId,
                 calculatedMetricFilter=calculatedMetricFilter,
@@ -91,11 +79,7 @@ GetCalculatedMetrics <- function(id=NULL,
   r <- adobe_get(endpoint, resource, globalCompanyId, query)
 
   #Set S3 method for easier parsing later
-  if(is.null(id)){
-    class(r) <- append(class(r), "CalculatedMetrics")
-  } else {
-    class(r) <- append(class(r), "CalculatedMetric")
-  }
+  class(r) <- append(class(r), "CalculatedMetrics")
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){

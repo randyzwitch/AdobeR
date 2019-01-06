@@ -4,15 +4,13 @@
 \alias{GetTags}
 \title{Get user-defined tags for a company account}
 \usage{
-GetTags(id = NULL, as.data.frame = TRUE)
+GetTags(as.data.frame = TRUE)
 }
 \arguments{
-\item{id}{(character) ID for tag to retrieve}
-
 \item{as.data.frame}{(logical) Return result as data.frame}
 }
 \value{
-data.frame or S3 (Tags | Tag)
+data.frame or S3 'Tags'
 }
 \description{
 Get user-defined tags for a company account
@@ -22,7 +20,5 @@ Get user-defined tags for a company account
 
 gtag <- GetTags()
 gtag.nodf <- GetTags(as.data.frame = FALSE) #returns S3 Tags
-gtagid <- GetTags("28638")
-gtagid.nodf <- GetTags("28638", as.data.frame = FALSE)
 }
 }

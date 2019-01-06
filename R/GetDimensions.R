@@ -1,7 +1,6 @@
 #' Get dimensions (props, eVars, etc.) defined in a given report suite(s)
 #'
 #' @param rsid (character) The report suite ID
-#' @param dimension (character) The dimension ID
 #' @param as.data.frame (logical) Return result as data.frame
 #' @param locale (character) Locale for encoding/localized spelling
 #' @param segmentable (logical) Only include dimensions that are valid within a
@@ -11,19 +10,16 @@
 #' @param classifiable (logical) Only include classifiable dimensions
 #' @param expansion (character) Add extra metadata to items (comma-delimited list)
 #'
-#' @return data.frame or S3 (Dimensions | Dimension)
+#' @return data.frame or S3 'Dimensions'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' dims <- GetDimensions("zwitchdev")
 #' dims.nodf <- GetDimensions("zwitchdev", as.data.frame = FALSE)
-#' dimsevar1 <- GetDimensions("zwitchdev", "evar1")
-#' dimsevar1.nodf <- GetDimensions("zwitchdev", "evar1", as.data.frame = FALSE)
 #'
 #' }
 GetDimensions <- function(rsid,
-                          dimension=NULL,
                           as.data.frame=TRUE,
                           locale=NULL,
                           segmentable=NULL,
@@ -34,8 +30,6 @@ GetDimensions <- function(rsid,
 
   assertthat::assert_that(is.character(rsid),
                           msg="rsid required to be class 'character'")
-  assertthat::assert_that(is.character(dimension) || is.null(dimension),
-                          msg="dimension required to be class 'character'")
   assertthat::assert_that(is.logical(as.data.frame),
                           msg="as.data.frame required to be class 'logical'")
   assertthat::assert_that(is.character(locale) || is.null(locale),
@@ -52,10 +46,6 @@ GetDimensions <- function(rsid,
   endpoint <- sprintf("https://analytics.adobe.io/api/%s/dimensions",
                       globalCompanyId)
 
-  if(!is.null(dimension)){
-    endpoint <- paste(endpoint, "/", dimension, sep="")
-  }
-
   #resource can stay empty, as dimensions built into endpoint string
   resource <- ""
 
@@ -71,11 +61,7 @@ GetDimensions <- function(rsid,
   r <- adobe_get(endpoint, resource, globalCompanyId, query)
 
   #Set S3 method for easier parsing later
-  if(is.null(dimension)){
-    class(r) <- append(class(r), "Dimensions")
-  } else {
-    class(r) <- append(class(r), "Dimension")
-  }
+  class(r) <- append(class(r), "Dimensions")
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){

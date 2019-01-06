@@ -1,6 +1,5 @@
 #' Get report suites for a company account
 #'
-#' @param rsid (character) ID of desired report suite
 #' @param as.data.frame (logical) Return result as data.frame
 #' @param rsids (character) Only include suites in this RSID list
 #'   (comma-delimited)
@@ -11,15 +10,13 @@
 #' @param expansion (character) Comma-delimited list of additional metadata
 #'   fields to include on response
 #'
-#' @return data.frame or S3 (ReportSuites | ReportSuite)
+#' @return data.frame or S3 'ReportSuites'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' grs <- GetReportSuites()
 #' grs.nodf <- GetReportSuites(as.data.frame = FALSE)
-#' grsrsid <- GetReportSuites("zwitchdev")
-#' grsrsid.nodf <- GetReportSuites("zwitchdev", as.data.frame = FALSE)
 #'
 #' }
 GetReportSuites <- function(rsid=NULL,
@@ -51,10 +48,6 @@ GetReportSuites <- function(rsid=NULL,
                       globalCompanyId)
   resource <- "/collections/suites"
 
-  if(!is.null(rsid)){
-    resource <- paste(resource, "/", rsid, sep="")
-  }
-
   query <- list(rsids=rsids,
                 rsidContains=rsidContains,
                 limit=limit,
@@ -65,11 +58,7 @@ GetReportSuites <- function(rsid=NULL,
   r <- adobe_get(endpoint, resource, globalCompanyId, query)
 
   #Set S3 method for easier parsing later
-  if(is.null(rsid)){
-    class(r) <- append(class(r), "ReportSuites")
-  } else {
-    class(r) <- append(class(r), "ReportSuite")
-  }
+  class(r) <- append(class(r), "ReportSuites")
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){

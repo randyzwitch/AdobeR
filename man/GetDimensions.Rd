@@ -4,14 +4,12 @@
 \alias{GetDimensions}
 \title{Get dimensions (props, eVars, etc.) defined in a given report suite(s)}
 \usage{
-GetDimensions(rsid, dimension = NULL, as.data.frame = TRUE,
-  locale = NULL, segmentable = NULL, reportable = NULL,
-  classifiable = NULL, expansion = NULL)
+GetDimensions(rsid, as.data.frame = TRUE, locale = NULL,
+  segmentable = NULL, reportable = NULL, classifiable = NULL,
+  expansion = NULL)
 }
 \arguments{
 \item{rsid}{(character) The report suite ID}
-
-\item{dimension}{(character) The dimension ID}
 
 \item{as.data.frame}{(logical) Return result as data.frame}
 
@@ -28,7 +26,7 @@ report}
 \item{expansion}{(character) Add extra metadata to items (comma-delimited list)}
 }
 \value{
-data.frame or S3 (Dimensions | Dimension)
+data.frame or S3 'Dimensions'
 }
 \description{
 Get dimensions (props, eVars, etc.) defined in a given report suite(s)
@@ -37,8 +35,6 @@ Get dimensions (props, eVars, etc.) defined in a given report suite(s)
 \dontrun{
 dims <- GetDimensions("zwitchdev")
 dims.nodf <- GetDimensions("zwitchdev", as.data.frame = FALSE)
-dimsevar1 <- GetDimensions("zwitchdev", "evar1")
-dimsevar1.nodf <- GetDimensions("zwitchdev", "evar1", as.data.frame = FALSE)
 
 }
 }

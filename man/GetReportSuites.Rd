@@ -8,8 +8,6 @@ GetReportSuites(rsid = NULL, as.data.frame = TRUE, rsids = NULL,
   rsidContains = NULL, limit = 100, page = 0, expansion = NULL)
 }
 \arguments{
-\item{rsid}{(character) ID of desired report suite}
-
 \item{as.data.frame}{(logical) Return result as data.frame}
 
 \item{rsids}{(character) Only include suites in this RSID list
@@ -26,7 +24,7 @@ rsidContains}
 fields to include on response}
 }
 \value{
-data.frame or S3 (ReportSuites | ReportSuite)
+data.frame or S3 'ReportSuites'
 }
 \description{
 Get report suites for a company account
@@ -35,8 +33,6 @@ Get report suites for a company account
 \dontrun{
 grs <- GetReportSuites()
 grs.nodf <- GetReportSuites(as.data.frame = FALSE)
-grsrsid <- GetReportSuites("zwitchdev")
-grsrsid.nodf <- GetReportSuites("zwitchdev", as.data.frame = FALSE)
 
 }
 }
