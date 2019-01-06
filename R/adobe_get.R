@@ -18,13 +18,13 @@ adobe_get <- function(endpoint, resource, globalCompanyId = NULL, query = NULL) 
 
   r <- httr::GET(fullURL, httr::add_headers(headers), query = query)
 
+  #representation as it came from API
+  r_text <- httr::content(r, as = "text", encoding = "UTF-8")
+
+  #parse JSON into data frame if possible
+  parsed <- jsonlite::fromJSON(r_text, simplifyDataFrame = TRUE, flatten = TRUE)
+
   if(!httr::http_error(r)){
-
-    #representation as it came from API
-    r_text <- httr::content(r, as = "text", encoding = "UTF-8")
-
-    #parse JSON into data frame if possible
-    parsed <- jsonlite::fromJSON(r_text, simplifyDataFrame = TRUE, flatten = TRUE)
 
     #return original content, as well as the parsed response from jsonlite
     #mark class as AdobeRSuccess, check will allow for error checking elsewhere
@@ -34,10 +34,8 @@ adobe_get <- function(endpoint, resource, globalCompanyId = NULL, query = NULL) 
 
   } else {
 
-    #TODO: check if token expired, refresh, then run again
-    print(httr::http_status(r))
-
-    #Check to see if Adobe returns an error message
+    #the stop here prevents needing to check the status in the caller function
+    #either adobe_get returns the expected response or stop throws the error
     if(!is.null(parsed$errorCode)){
       stop(sprintf("Error %s: %s", parsed$errorCode, parsed$errorDescription))
     } else if(!is.null(parsed$error_code)){
