@@ -1,5 +1,14 @@
 #' Get metrics (custom events and pre-defined) defined in a given report suite(s)
 #'
+#' @details The 'expansion' keyword allows for specifying a list of additional
+#'   fields to return as part of the response. These fields should be specified
+#'   as a character vector (string), separated with commas and no spaces between
+#'   the fields.
+#'
+#'   Because of the complex nature of having unknown combinations of extra
+#'   fields returned on a function call, using the 'expansion' field with
+#'   as.data.frame=TRUE can return undesirable results.
+#'
 #' @param rsid (character) ID of desired report suite
 #' @param as.data.frame (logical) Return result as data.frame
 #' @param locale (character) Locale for encoding/localized spelling
