@@ -4,14 +4,10 @@
 \alias{GetUsers}
 \title{Get users for a company account}
 \usage{
-GetUsers(as.data.frame = TRUE, limit = 100, page = 0)
+GetUsers(as.data.frame = TRUE)
 }
 \arguments{
 \item{as.data.frame}{(logical) Return result as data.frame}
-
-\item{limit}{(integer) Number of results per page}
-
-\item{page}{(integer) Page number (base 0 - first page is "0")}
 }
 \value{
 data.frame or S3 'Users'
