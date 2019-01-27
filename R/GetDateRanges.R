@@ -77,7 +77,7 @@ GetDateRanges <- function(as.data.frame=TRUE,
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){
-    return(dplyr::bind_rows(lapply(r, as.data.frame)))
+    return(as.data.frame(r))
   }
 
   return(r)
