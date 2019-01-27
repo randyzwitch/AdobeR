@@ -5,7 +5,7 @@
 \title{Get report suites for a company account}
 \usage{
 GetReportSuites(rsid = NULL, as.data.frame = TRUE, rsids = NULL,
-  rsidContains = NULL, limit = 100, page = 0, expansion = NULL)
+  rsidContains = NULL, expansion = NULL)
 }
 \arguments{
 \item{as.data.frame}{(logical) Return result as data.frame}
@@ -15,10 +15,6 @@ GetReportSuites(rsid = NULL, as.data.frame = TRUE, rsids = NULL,
 
 \item{rsidContains}{(character) Only include suites whose rsid contains
 rsidContains}
-
-\item{limit}{(integer) Number of results per page}
-
-\item{page}{(integer) Page number (base 0 - first page is "0")}
 
 \item{expansion}{(character) Comma-delimited list of additional metadata
 fields to include on response}

@@ -5,7 +5,7 @@
 \title{Get user-defined date ranges for a company account}
 \usage{
 GetDateRanges(as.data.frame = TRUE, locale = NULL,
-  filterByIds = NULL, limit = 100, page = 0, expansion = NULL)
+  filterByIds = NULL, expansion = NULL)
 }
 \arguments{
 \item{as.data.frame}{(logical) Return result as data.frame}
@@ -14,10 +14,6 @@ GetDateRanges(as.data.frame = TRUE, locale = NULL,
 
 \item{filterByIds}{(character) Only include date ranges in the specified
 list (comma-delimited list of IDs)}
-
-\item{limit}{(integer) Number of results per page}
-
-\item{page}{(integer) Page number (base 0 - first page is "0")}
 
 \item{expansion}{(character) Comma-delimited list of additional date range
 metadata fields to include on response}

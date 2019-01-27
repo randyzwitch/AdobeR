@@ -1,8 +1,6 @@
 #' Get users for a company account
 #'
 #' @param as.data.frame (logical) Return result as data.frame
-#' @param limit (integer) Number of results per page
-#' @param page (integer) Page number (base 0 - first page is "0")
 #'
 #' @return data.frame or S3 'Users'
 #' @export
@@ -14,16 +12,10 @@
 #' users.nodf <- GetUsers(as.data.frame = FALSE) #returns S3 Users
 #'
 #' }
-GetUsers <- function(as.data.frame=TRUE,
-                     limit=100,
-                     page=0) {
+GetUsers <- function(as.data.frame=TRUE) {
 
   assertthat::assert_that(is.logical(as.data.frame),
                           msg="as.data.frame required to be class 'logical'")
-  assertthat::assert_that(is.numeric(limit),
-                          msg="limit required to be class 'numeric' (integer)")
-  assertthat::assert_that(is.numeric(page),
-                          msg="page required to be class 'numeric' (integer)")
 
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
@@ -32,12 +24,29 @@ GetUsers <- function(as.data.frame=TRUE,
 
   resource <- "/users"
 
-  query <- list(limit=limit, page=page)
+  limit=100
+  page=0
+  r <- list()
 
-  r <- adobe_get(endpoint, resource, globalCompanyId, query)
+  repeat{
 
-  #Set S3 method for easier parsing later
-  class(r) <- append(class(r), "Users")
+    query <- list(limit=limit, page=page)
+
+    tmp <- adobe_get(endpoint, resource, globalCompanyId, query)
+
+    #Set S3 method for easier parsing later
+    class(tmp) <- append(class(tmp), "Users")
+
+    r <- append(r, list(tmp))
+    page <- page + 1
+
+    if(tmp$response$lastPage){
+      break
+    }
+
+  }
+
+  class(r) <- "UsersList"
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){

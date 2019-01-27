@@ -18,8 +18,6 @@
 #' @param locale (character) Locale for encoding/localized spelling
 #' @param name (character) Only include segments that contains the name
 #' @param tagNames (character) Only include segments that contains one of the tags
-#' @param limit (integer) Number of results per page
-#' @param page (integer) Page number (base 0 - first page is "0")
 #' @param expansion (character) Comma-delimited list of additional metadata
 #'   fields to include on response
 #'
@@ -38,8 +36,6 @@ GetSegments <- function(as.data.frame=TRUE,
                         locale=NULL,
                         name=NULL,
                         tagNames=NULL,
-                        limit=100,
-                        page=0,
                         expansion=NULL) {
 
   assertthat::assert_that(is.logical(as.data.frame),
@@ -54,10 +50,6 @@ GetSegments <- function(as.data.frame=TRUE,
                           msg="name required to be class 'character'")
   assertthat::assert_that(is.character(tagNames) || is.null(tagNames),
                           msg="tagNames required to be class 'character'")
-  assertthat::assert_that(is.numeric(limit),
-                          msg="limit required to be class 'numeric' (integer)")
-  assertthat::assert_that(is.numeric(page),
-                          msg="page required to be class 'numeric' (integer)")
   assertthat::assert_that(is.character(expansion) || is.null(expansion),
                           msg="expansion required to be class 'character'")
 
@@ -68,19 +60,36 @@ GetSegments <- function(as.data.frame=TRUE,
 
   resource <- "/segments"
 
-  query <- list(rsids=rsids,
-                segmentFilter=segmentFilter,
-                locale=locale,
-                name=name,
-                tagNames=tagNames,
-                limit=limit,
-                page=page,
-                expansion=expansion)
+  limit=100
+  page=0
+  r <- list()
 
-  r <- adobe_get(endpoint, resource, globalCompanyId, query)
+  repeat{
 
-  #Set S3 method for easier parsing later
-  class(r) <- append(class(r), "Segments")
+    query <- list(rsids=rsids,
+                  segmentFilter=segmentFilter,
+                  locale=locale,
+                  name=name,
+                  tagNames=tagNames,
+                  limit=limit,
+                  page=page,
+                  expansion=expansion)
+
+    tmp <- adobe_get(endpoint, resource, globalCompanyId, query)
+
+    #Set S3 method for easier parsing later
+    class(tmp) <- append(class(tmp), "Segments")
+
+    r <- append(r, list(tmp))
+    page <- page + 1
+
+    if(tmp$response$lastPage){
+      break
+    }
+
+  }
+
+  class(r) <- "SegmentsList"
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){

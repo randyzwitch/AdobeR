@@ -6,8 +6,7 @@
 \usage{
 GetCalculatedMetrics(as.data.frame = TRUE, rsids = NULL,
   ownerId = NULL, calculatedMetricFilter = NULL, locale = NULL,
-  name = NULL, tagNames = NULL, limit = 100, page = 0,
-  expansion = NULL)
+  name = NULL, tagNames = NULL, expansion = NULL)
 }
 \arguments{
 \item{as.data.frame}{(logical) Return result as data.frame}
@@ -27,10 +26,6 @@ the specified list (comma-delimited list of IDs)}
 
 \item{tagNames}{(character) Only include calculated metrics that contains
 one of the tags}
-
-\item{limit}{(integer) Number of results per page}
-
-\item{page}{(integer) Page number (base 0 - first page is "0")}
 
 \item{expansion}{(character) Comma-delimited list of additional calculated
 metric metadata fields to include on response}

@@ -14,8 +14,6 @@
 #'   (comma-delimited)
 #' @param rsidContains (character) Only include suites whose rsid contains
 #'   rsidContains
-#' @param limit (integer) Number of results per page
-#' @param page (integer) Page number (base 0 - first page is "0")
 #' @param expansion (character) Comma-delimited list of additional metadata
 #'   fields to include on response
 #'
@@ -32,8 +30,6 @@ GetReportSuites <- function(rsid=NULL,
                             as.data.frame=TRUE,
                             rsids=NULL,
                             rsidContains=NULL,
-                            limit=100,
-                            page=0,
                             expansion=NULL) {
 
   assertthat::assert_that(is.character(rsid) || is.null(rsid),
@@ -44,10 +40,6 @@ GetReportSuites <- function(rsid=NULL,
                           msg="rsids required to be class 'character'")
   assertthat::assert_that(is.character(rsidContains) || is.null(rsidContains),
                           msg="rsidContains required to be class 'character'")
-  assertthat::assert_that(is.numeric(limit),
-                          msg="limit required to be class 'numeric' (integer)")
-  assertthat::assert_that(is.numeric(page),
-                          msg="page required to be class 'numeric' (integer)")
   assertthat::assert_that(is.character(expansion) || is.null(expansion),
                           msg="expansion required to be class 'character'")
 
@@ -57,17 +49,34 @@ GetReportSuites <- function(rsid=NULL,
                       globalCompanyId)
   resource <- "/collections/suites"
 
-  query <- list(rsids=rsids,
-                rsidContains=rsidContains,
-                limit=limit,
-                page=page,
-                expansion=expansion
-                )
+  limit=100
+  page=0
+  r <- list()
 
-  r <- adobe_get(endpoint, resource, globalCompanyId, query)
+  repeat{
 
-  #Set S3 method for easier parsing later
-  class(r) <- append(class(r), "ReportSuites")
+    query <- list(rsids=rsids,
+                  rsidContains=rsidContains,
+                  limit=limit,
+                  page=page,
+                  expansion=expansion
+                  )
+
+    tmp <- adobe_get(endpoint, resource, globalCompanyId, query)
+
+    #Set S3 method for easier parsing later
+    class(tmp) <- append(class(tmp), "ReportSuites")
+
+    r <- append(r, list(tmp))
+    page <- page + 1
+
+    if(tmp$response$lastPage){
+      break
+    }
+
+  }
+
+  class(r) <- "ReportSuitesList"
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){
