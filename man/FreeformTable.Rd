@@ -2,13 +2,25 @@
 % Please edit documentation in R/FreeformTable.R
 \name{FreeformTable}
 \alias{FreeformTable}
-\title{Title}
+\title{Create a table of dimensions and metrics}
 \usage{
-FreeformTable(rsid, as.data.frame = TRUE)
+FreeformTable(rsid, dimension, as.data.frame = TRUE)
 }
 \arguments{
 \item{rsid}{(character) The report suite ID}
+
+\item{dimension}{(character) Dimension (props, eVars, etc.) for report breakdown}
+}
+\value{
+data.frame or S3 "FreeformTableList"
 }
 \description{
-Title
+This function mimics the functionality of the Freeform Table panel in Analysis
+Workspace.The main difference between this function and Analysis Workspace is
+that individual row drill-downs aren't possible due to the constraints of
+the data.frame data structure. Thus, requesting to drill-down by a second
+dimension will do so for all rows, not just a single row.
+}
+\seealso{
+\code{\link{GetDimensions}} \code{\link{GetMetrics}}
 }
