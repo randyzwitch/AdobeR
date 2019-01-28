@@ -1,16 +1,42 @@
-#' Title
+#' Create a table of dimensions and metrics
+#'
+#' This function mimics the functionality of the Freeform Table panel in Analysis
+#' Workspace.The main difference between this function and Analysis Workspace is
+#' that individual row drill-downs aren't possible due to the constraints of
+#' the data.frame data structure. Thus, requesting to drill-down by a second
+#' dimension will do so for all rows, not just a single row.
+#'
 #'
 #' @param rsid (character) The report suite ID
+#' @param dimension (character) Dimension (props, eVars, etc.) for report breakdown
 #'
-#' @return
+#' @return data.frame or S3 "FreeformTableList"
 #' @export
+#'
+#' @seealso \code{\link{GetDimensions}} \code{\link{GetMetrics}}
 #'
 #' @examples
 FreeformTable <- function(rsid,
+                          dimension,
                           as.data.frame=TRUE){
 
+  #### validate inputs
   assertthat::assert_that(is.character(rsid),
                           msg="rsid required to be class 'character'")
+
+  assertthat::assert_that(is.character(dimension),
+                          msg="dimension required to be class 'character'")
+
+
+  #### convert inputs to valid values
+  if(!startsWith(dimension, "variables/")){
+    # warning("Dimension value should start with 'variables/',
+    #         prepending 'variables/' and trying")
+    dimension <- paste("variables/", dimension, sep="")
+  }
+
+
+  #### retrieve results
 
   r <- list()
   page <- 0
@@ -18,11 +44,12 @@ FreeformTable <- function(rsid,
   repeat{
 
       request <- list(
+
         #single string
         rsid = rsid,
 
         #single string
-        dimension = "variables/daterangeday",
+        dimension = dimension,
 
         #compound object
         locale = list(),
@@ -54,7 +81,7 @@ FreeformTable <- function(rsid,
             list(columnId = "visits", id = "metrics/visits")
           ) #metrics
 
-        ) #inner metricContainer
+        )  #inner metricContainer
         ), #outer metricContainer
 
         #compound object
@@ -68,9 +95,17 @@ FreeformTable <- function(rsid,
       r <- append(r, list(tmp))
       page <- page + 1
 
-      if(tmp$response$lastPage){
+      #Catch error if it happens
+      #If no error, check if its last page and break if it is
+      #Otherwise, keep paging over results
+      if(length(tmp$response$columns$columnErrors$errorDescription) > 0){
+        #Just print off first error, hopefully enough to help user fix
+        stop(tmp$response$columns$columnErrors$errorDescription[1])
+
+      } else if(tmp$response$lastPage){
         break
       }
+
   }
 
   #Set S3 method for easier parsing later
