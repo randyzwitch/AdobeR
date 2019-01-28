@@ -19,7 +19,7 @@ adobe_post <- function(resource, body, query=NULL) {
 
   r <- httr::POST(fullURL,
                   httr::add_headers(headers),
-                  body = request,
+                  body = body,
                   query = query,
                   encode = "json")
 
