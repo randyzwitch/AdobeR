@@ -9,6 +9,8 @@
 #'
 #' @param rsid (character) The report suite ID
 #' @param dimension (character) Dimension (props, eVars, etc.) for report breakdown
+#' @param startDate (character/Date) Global report filter: start date
+#' @param endDate (character/Date) Global report filter: end date
 #'
 #' @return data.frame or S3 "FreeformTableList"
 #' @export
@@ -18,6 +20,8 @@
 #' @examples
 FreeformTable <- function(rsid,
                           dimension,
+                          startDate,
+                          endDate,
                           as.data.frame=TRUE){
 
   #### validate inputs
@@ -27,11 +31,17 @@ FreeformTable <- function(rsid,
   assertthat::assert_that(is.character(dimension),
                           msg="dimension required to be class 'character'")
 
+  assertthat::assert_that(is.character(startDate) || assertthat::is.date(startDate),
+                          msg="startDate required to be class 'character' or 'Date'")
+
+  assertthat::assert_that(is.character(endDate) || assertthat::is.date(endDate),
+                          msg="endDate required to be class 'character' or 'Date'")
+
+  assertthat::assert_that(as.Date(endDate) >= as.Date(startDate),
+                          msg="endDate must be >= startDate")
 
   #### convert inputs to valid values
   if(!startsWith(dimension, "variables/")){
-    # warning("Dimension value should start with 'variables/',
-    #         prepending 'variables/' and trying")
     dimension <- paste("variables/", dimension, sep="")
   }
 
@@ -52,17 +62,20 @@ FreeformTable <- function(rsid,
         dimension = dimension,
 
         #compound object
+        #TODO: make a kwarg/function
         locale = list(),
 
         #compound object, list for each object
+        #TODO: make append for all filters, kwarg for additional filters
         globalFilters = list(
           list(
             type = "dateRange",
-            dateRange = "2017-12-31T00:00:00.000/2019-01-06T23:59:59.999"
+            dateRange = sprintf("%sT00:00:00.000/%sT23:59:59.999", startDate, endDate)
               )
         ),
 
         #compound object
+        #TODO: make append for search, kwarg for additional filters
         search = list(),
 
         #flat object, named list directly specifies settings
@@ -72,9 +85,11 @@ FreeformTable <- function(rsid,
                         page=page),
 
         #compound object
+        #TODO: make append for all filters, kwarg for additional filters
         statistics = list(),
 
         #compound object, metrics and metricsFilter only two top-level choices?
+        #TODO: make append for all filters, kwarg for additional filters
         metricContainer = c(list(
           metrics = list(
             list(columnId = "pageviews", id = "metrics/pageviews"),
@@ -85,9 +100,11 @@ FreeformTable <- function(rsid,
         ), #outer metricContainer
 
         #compound object
+        #TODO: make append for all filters, kwarg for additional filters
         rowContainer = list(),
 
         #single string
+        #TODO: make append for all filters, kwarg for additional filters
         anchorDate = NULL
       )
 
