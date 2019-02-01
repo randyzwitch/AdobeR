@@ -4,7 +4,10 @@
 \alias{FreeformTable}
 \title{Create a table of dimensions and metrics}
 \usage{
-FreeformTable(rsid, dimension, startDate, endDate, as.data.frame = TRUE)
+FreeformTable(rsid, dimension, startDate, endDate, locale = NULL,
+  globalFilters = NULL, search = NULL, statistics = NULL,
+  rowContainer = NULL, anchorDate = NULL, as.data.frame = TRUE,
+  show = FALSE)
 }
 \arguments{
 \item{rsid}{(character) The report suite ID}
@@ -14,6 +17,8 @@ FreeformTable(rsid, dimension, startDate, endDate, as.data.frame = TRUE)
 \item{startDate}{(character/Date) Global report filter: start date}
 
 \item{endDate}{(character/Date) Global report filter: end date}
+
+\item{as.data.frame}{}
 }
 \value{
 data.frame or S3 "FreeformTableList"
