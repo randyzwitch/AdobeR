@@ -11,6 +11,13 @@
 #' @param dimension (character) Dimension (props, eVars, etc.) for report breakdown
 #' @param startDate (character/Date) Global report filter: start date
 #' @param endDate (character/Date) Global report filter: end date
+#' @param locale
+#' @param globalFilters
+#' @param search
+#' @param statistics
+#' @param rowContainer
+#' @param anchorDate
+#' @param as.data.frame
 #'
 #' @return data.frame or S3 "FreeformTableList"
 #' @export
@@ -22,9 +29,19 @@ FreeformTable <- function(rsid,
                           dimension,
                           startDate,
                           endDate,
-                          as.data.frame=TRUE){
+                          locale=NULL,
+                          globalFilters=NULL,
+                          search=NULL,
+                          statistics=NULL,
+                          rowContainer=NULL,
+                          anchorDate=NULL,
+                          as.data.frame=TRUE,
+                          show=FALSE){
 
+  ####
   #### validate inputs
+  ####
+
   assertthat::assert_that(is.character(rsid),
                           msg="rsid required to be class 'character'")
 
@@ -40,13 +57,28 @@ FreeformTable <- function(rsid,
   assertthat::assert_that(as.Date(endDate) >= as.Date(startDate),
                           msg="endDate must be >= startDate")
 
+  ####
   #### convert inputs to valid values
+  ####
+
   if(!startsWith(dimension, "variables/")){
     dimension <- paste("variables/", dimension, sep="")
   }
 
+  #dateRange filter required
+  gfilters <-list()
 
+  dr <- list(type = "dateRange",
+             dateRange = sprintf("%sT00:00:00.000/%sT23:59:59.999",
+                                 startDate,
+                                 endDate)
+             )
+  gfilters <- append(gfilters, list(dr))
+  #TODO: incorporate globalFilters kwarg
+
+  ####
   #### retrieve results
+  ####
 
   r <- list()
   page <- 0
@@ -62,31 +94,24 @@ FreeformTable <- function(rsid,
         dimension = dimension,
 
         #compound object
-        #TODO: make a kwarg/function
-        locale = list(),
+        #TODO: make a locale function
+        locale = locale,
 
         #compound object, list for each object
         #TODO: make append for all filters, kwarg for additional filters
-        globalFilters = list(
-          list(
-            type = "dateRange",
-            dateRange = sprintf("%sT00:00:00.000/%sT23:59:59.999", startDate, endDate)
-              )
-        ),
+        globalFilters = gfilters,
 
         #compound object
         #TODO: make append for search, kwarg for additional filters
-        search = list(),
+        search = search,
 
         #flat object, named list directly specifies settings
         #TODO: find other settings, dimensionSort might not always make sense as asc
-        settings = list(dimensionSort = "asc",
-                        limit=50,
-                        page=page),
+        settings = list(dimensionSort = "asc", limit=50, page=page),
 
         #compound object
         #TODO: make append for all filters, kwarg for additional filters
-        statistics = list(),
+        statistics = statistics,
 
         #compound object, metrics and metricsFilter only two top-level choices?
         #TODO: make append for all filters, kwarg for additional filters
@@ -101,12 +126,21 @@ FreeformTable <- function(rsid,
 
         #compound object
         #TODO: make append for all filters, kwarg for additional filters
-        rowContainer = list(),
+        rowContainer = rowContainer,
 
         #single string
         #TODO: make append for all filters, kwarg for additional filters
-        anchorDate = NULL
+        anchorDate = anchorDate
       )
+
+      if(show){
+        print("-----------------")
+        print(jsonlite::toJSON(request,
+                               auto_unbox = TRUE,
+                               pretty=TRUE,
+                               null='null'))
+        print("-----------------")
+      }
 
       tmp <- adobe_post("/reports", request)
       r <- append(r, list(tmp))
