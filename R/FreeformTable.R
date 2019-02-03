@@ -11,13 +11,15 @@
 #' @param dimension (character) Dimension (props, eVars, etc.) for report breakdown
 #' @param startDate (character/Date) Global report filter: start date
 #' @param endDate (character/Date) Global report filter: end date
+#' @param as.data.frame (logical) Return result as data.frame
+#' @param anomalyDetection (logical) Calculate anomaly detection report
+#' @param includePercentChange (logical) Calculate percentage change report
 #' @param locale
 #' @param globalFilters
 #' @param search
 #' @param statistics
 #' @param rowContainer
 #' @param anchorDate
-#' @param as.data.frame
 #'
 #' @return data.frame or S3 "FreeformTableList"
 #' @export
@@ -29,14 +31,17 @@ FreeformTable <- function(rsid,
                           dimension,
                           startDate,
                           endDate,
+                          as.data.frame=TRUE,
+                          anomalyDetection=FALSE,
+                          includePercentChange=FALSE,
                           locale=NULL,
                           globalFilters=NULL,
                           search=NULL,
                           statistics=NULL,
                           rowContainer=NULL,
                           anchorDate=NULL,
-                          as.data.frame=TRUE,
-                          show=FALSE){
+                          show=FALSE
+                          ){
 
   ####
   #### validate inputs
@@ -61,6 +66,7 @@ FreeformTable <- function(rsid,
   #### convert inputs to valid values
   ####
 
+  #convert dimension to valid values
   if(!startsWith(dimension, "variables/")){
     dimension <- paste("variables/", dimension, sep="")
   }
@@ -89,31 +95,17 @@ FreeformTable <- function(rsid,
 
         #single string
         rsid = rsid,
-
-        #single string
         dimension = dimension,
+        anchorDate = anchorDate,
 
         #compound object
-        #TODO: make a locale function
         locale = locale,
-
-        #compound object, list for each object
-        #TODO: make append for all filters, kwarg for additional filters
         globalFilters = gfilters,
-
-        #compound object
-        #TODO: make append for search, kwarg for additional filters
         search = search,
-
-        #flat object, named list directly specifies settings
-        #TODO: find other settings, dimensionSort might not always make sense as asc
-        settings = list(dimensionSort = "asc", limit=50, page=page),
-
-        #compound object
-        #TODO: make append for all filters, kwarg for additional filters
         statistics = statistics,
+        rowContainer = rowContainer,
 
-        #compound object, metrics and metricsFilter only two top-level choices?
+        #metrics and metricsFilter only two top-level choices?
         #TODO: make append for all filters, kwarg for additional filters
         metricContainer = c(list(
           metrics = list(
@@ -124,15 +116,16 @@ FreeformTable <- function(rsid,
         )  #inner metricContainer
         ), #outer metricContainer
 
-        #compound object
-        #TODO: make append for all filters, kwarg for additional filters
-        rowContainer = rowContainer,
-
-        #single string
-        #TODO: make append for all filters, kwarg for additional filters
-        anchorDate = anchorDate
+        #flat object: named list directly specifies settings
+        settings = list(dimensionSort = "asc",
+                        limit=50,
+                        page=page,
+                        includeAnomalyDetection=anomalyDetection,
+                        includePercentChange=includePercentChange
+                        )
       )
 
+      #Delete after package done, remove show kwarg
       if(show){
         print("-----------------")
         print(jsonlite::toJSON(request,

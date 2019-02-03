@@ -4,9 +4,10 @@
 \alias{FreeformTable}
 \title{Create a table of dimensions and metrics}
 \usage{
-FreeformTable(rsid, dimension, startDate, endDate, locale = NULL,
-  globalFilters = NULL, search = NULL, statistics = NULL,
-  rowContainer = NULL, anchorDate = NULL, as.data.frame = TRUE,
+FreeformTable(rsid, dimension, startDate, endDate, as.data.frame = TRUE,
+  anomalyDetection = FALSE, includePercentChange = FALSE,
+  locale = NULL, globalFilters = NULL, search = NULL,
+  statistics = NULL, rowContainer = NULL, anchorDate = NULL,
   show = FALSE)
 }
 \arguments{
@@ -18,7 +19,13 @@ FreeformTable(rsid, dimension, startDate, endDate, locale = NULL,
 
 \item{endDate}{(character/Date) Global report filter: end date}
 
-\item{as.data.frame}{}
+\item{as.data.frame}{(logical) Return result as data.frame}
+
+\item{anomalyDetection}{(logical) Calculate anomaly detection report}
+
+\item{includePercentChange}{(logical) Calculate percentage change report}
+
+\item{anchorDate}{}
 }
 \value{
 data.frame or S3 "FreeformTableList"
