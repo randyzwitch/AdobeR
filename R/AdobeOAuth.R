@@ -17,7 +17,7 @@
 #'
 #' @param key (character) API Key (Client ID) from adobe.io console
 #' @param secret (character) Client secret from adobe.io console
-#' @param globalCompanyId (character) Deisred globalCompanyId (defined by Adobe)
+#' @param globalCompanyId (character) Desired globalCompanyId (defined by Adobe)
 #'   to access
 #' @param scope (character) Access scopes for account
 #' @param authfile (character) File name for cached OAuth credentials
@@ -78,6 +78,15 @@ AdobeOAuth <- function(key,
 
   #Assign to AdobeRInternals environment, so that other functions know where auth located
   assign("auth", auth, envir = AdobeRInternals)
+
+  #Make call to validate whether token valid
+  guca <- GetUserCompanyAccess(FALSE)
+  ifelse("AdobeRSuccess" %in% class(guca),
+         print("Token valid"),
+         print("Token expired, refresh")
+  )
+
+  authDEV <<- AdobeRInternals$auth
 
   #If user-specifies globalCompanyId, then store it
   #Otherwise, get the id by calling GetUserCompanyAccess and take first row

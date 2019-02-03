@@ -12,7 +12,7 @@ AdobeOAuth(key, secret, globalCompanyId = NULL, scope = NULL,
 
 \item{secret}{(character) Client secret from adobe.io console}
 
-\item{globalCompanyId}{(character) Deisred globalCompanyId (defined by Adobe)
+\item{globalCompanyId}{(character) Desired globalCompanyId (defined by Adobe)
 to access}
 
 \item{scope}{(character) Access scopes for account}
