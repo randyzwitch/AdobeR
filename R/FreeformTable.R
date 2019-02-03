@@ -66,11 +66,6 @@ FreeformTable <- function(rsid,
   #### convert inputs to valid values
   ####
 
-  #convert dimension to valid values
-  if(!startsWith(dimension, "variables/")){
-    dimension <- paste("variables/", dimension, sep="")
-  }
-
   #dateRange filter required
   gfilters <-list()
 
