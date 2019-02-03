@@ -22,7 +22,7 @@ AdobeJWT <- function(privatekey,
   pkey <- paste(readLines("private.key"), collapse = "\n")
 
   #Paste in information from JWT section of Adobe website
-  claim <- jwt_claim(exp=as.integer(Sys.time() + 3600 * 24),
+  claim <- jose::jwt_claim(exp=as.integer(Sys.time() + 3600 * 24),
                      iss=orgid,
                      sub=techacctid,
                      aud=paste("https://ims-na1.adobelogin.com/c/", clientid, sep=""),
@@ -30,7 +30,7 @@ AdobeJWT <- function(privatekey,
                      )
 
   #Create JWT
-  val <- jwt_encode_sig(claim = claim, pkey, size = 256)
+  val <- jose::jwt_encode_sig(claim = claim, pkey, size = 256)
 
   #make POST call to swap JWT for bearer token
   token <- httr::POST("https://ims-na1.adobelogin.com/ims/exchange/jwt/",
@@ -44,6 +44,7 @@ AdobeJWT <- function(privatekey,
   cont <- httr::content(token)
 
   auth <- list(credentials=cont, app=list(key=clientid))
+  authJWT <<- auth
 
   #Assign to AdobeRInternals environment, so that other functions know where auth located
   assign("auth", auth, envir = AdobeRInternals)
