@@ -9,6 +9,7 @@
 #'
 #' @param rsid (character) The report suite ID
 #' @param dimension (character) Dimension (props, eVars, etc.) for report breakdown
+#' @param metrics (character)
 #' @param startDate (character/Date) Global report filter: start date
 #' @param endDate (character/Date) Global report filter: end date
 #' @param as.data.frame (logical) Return result as data.frame
@@ -29,6 +30,7 @@
 #' @examples
 FreeformTable <- function(rsid,
                           dimension,
+                          metrics,
                           startDate,
                           endDate,
                           as.data.frame=TRUE,
@@ -43,9 +45,9 @@ FreeformTable <- function(rsid,
                           show=FALSE
                           ){
 
-  ####
-  #### validate inputs
-  ####
+  ##############################################################################
+  #### validate function inputs
+  ##############################################################################  ####
 
   assertthat::assert_that(is.character(rsid),
                           msg="rsid required to be class 'character'")
@@ -62,9 +64,9 @@ FreeformTable <- function(rsid,
   assertthat::assert_that(as.Date(endDate) >= as.Date(startDate),
                           msg="endDate must be >= startDate")
 
-  ####
-  #### convert inputs to valid values
-  ####
+  ##############################################################################  ####
+  #### build json structures from inputs
+  ##############################################################################  ####
 
   #dateRange filter required
   gfilters <-list()
@@ -77,9 +79,9 @@ FreeformTable <- function(rsid,
   gfilters <- append(gfilters, list(dr))
   #TODO: incorporate globalFilters kwarg
 
-  ####
-  #### retrieve results
-  ####
+  ##############################################################################  ####
+  #### make API call, retrieve results
+  ##############################################################################  ####
 
   r <- list()
   page <- 0
@@ -149,6 +151,10 @@ FreeformTable <- function(rsid,
 
   #Set S3 method for easier parsing later
   class(r) <- append(class(r), "FreeformTableList")
+
+  ##############################################################################  ####
+  #### parse results
+  ##############################################################################  ####
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){

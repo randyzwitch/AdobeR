@@ -4,16 +4,18 @@
 \alias{FreeformTable}
 \title{Create a table of dimensions and metrics}
 \usage{
-FreeformTable(rsid, dimension, startDate, endDate, as.data.frame = TRUE,
-  anomalyDetection = FALSE, includePercentChange = FALSE,
-  locale = NULL, globalFilters = NULL, search = NULL,
-  statistics = NULL, rowContainer = NULL, anchorDate = NULL,
-  show = FALSE)
+FreeformTable(rsid, dimension, metrics, startDate, endDate,
+  as.data.frame = TRUE, anomalyDetection = FALSE,
+  includePercentChange = FALSE, locale = NULL, globalFilters = NULL,
+  search = NULL, statistics = NULL, rowContainer = NULL,
+  anchorDate = NULL, show = FALSE)
 }
 \arguments{
 \item{rsid}{(character) The report suite ID}
 
 \item{dimension}{(character) Dimension (props, eVars, etc.) for report breakdown}
+
+\item{metrics}{(character)}
 
 \item{startDate}{(character/Date) Global report filter: start date}
 
