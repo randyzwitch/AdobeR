@@ -163,16 +163,23 @@ FreeformTable <- function(rsid,
     list_df <- lapply(r, function(x) x$response$rows)
     flattened_df <- dplyr::bind_rows(list_df)
 
+    #change from default of "value" to dimension name without prepended value
+    flattened_df <- dplyr::rename(flattened_df,
+                                  !!strsplit(dimension, "/")[[1]][2] := value)
+
     #parse out metrics from data list col
     #go over column as a list, transpose cell so data.frame comes out correct
     #while this may be inefficient, it is one pass over the data, so maybe ok
     parsed_data <- dplyr::bind_rows(lapply(flattened_df$data, function(x) as.data.frame(t(x))))
-    names(parsed_data) <- c("pageviews", "visits") #TODO: get this automatically
+    names(parsed_data) <- lapply(metrics, function(x) strsplit(x, "/")[[1]][2])
 
     #don't need data column after its split into multiple cols
     flattened_df$data <- NULL
 
-    return(cbind(flattened_df, parsed_data))
+    #bind parts together before return
+    finaldf <- cbind(flattened_df, parsed_data)
+
+    return(finaldf)
   }
 
   return(r)
