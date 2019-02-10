@@ -28,6 +28,9 @@
 #' @seealso \code{\link{GetDimensions}} \code{\link{GetMetrics}}
 #'
 #' @examples
+#' \dontrun{
+#'
+#' }
 FreeformTable <- function(rsid,
                           dimension,
                           metrics,
@@ -64,9 +67,9 @@ FreeformTable <- function(rsid,
   assertthat::assert_that(as.Date(endDate) >= as.Date(startDate),
                           msg="endDate must be >= startDate")
 
-  ##############################################################################  ####
+  ##############################################################################
   #### build json structures from inputs
-  ##############################################################################  ####
+  ##############################################################################
 
   #dateRange filter required
   gfilters <-list()
@@ -79,9 +82,9 @@ FreeformTable <- function(rsid,
   gfilters <- append(gfilters, list(dr))
   #TODO: incorporate globalFilters kwarg
 
-  ##############################################################################  ####
+  ##############################################################################
   #### make API call, retrieve results
-  ##############################################################################  ####
+  ##############################################################################
 
   r <- list()
   page <- 0
@@ -103,15 +106,10 @@ FreeformTable <- function(rsid,
         rowContainer = rowContainer,
 
         #metrics and metricsFilter only two top-level choices?
-        #TODO: make append for all filters, kwarg for additional filters
+        #TODO: implement metricsFilters, kwarg for metricsFilters
         metricContainer = c(list(
-          metrics = list(
-            list(columnId = "pageviews", id = "metrics/pageviews"),
-            list(columnId = "visits", id = "metrics/visits")
-          ) #metrics
-
-        )  #inner metricContainer
-        ), #outer metricContainer
+          metrics = lapply(metrics, function(x) list(id = x, columnId = stringAfterSlash(x)))
+        )), #)) closes metricContainer
 
         #flat object: named list directly specifies settings
         settings = list(dimensionSort = "asc",
@@ -120,7 +118,8 @@ FreeformTable <- function(rsid,
                         includeAnomalyDetection=anomalyDetection,
                         includePercentChange=includePercentChange
                         )
-      )
+
+      ) #end of request
 
       #Delete after package done, remove show kwarg
       if(show){
@@ -132,6 +131,7 @@ FreeformTable <- function(rsid,
         print("-----------------")
       }
 
+      #make API call, append to results list and increment
       tmp <- adobe_post("/reports", request)
       r <- append(r, list(tmp))
       page <- page + 1
@@ -152,9 +152,9 @@ FreeformTable <- function(rsid,
   #Set S3 method for easier parsing later
   class(r) <- append(class(r), "FreeformTableList")
 
-  ##############################################################################  ####
+  ##############################################################################
   #### parse results
-  ##############################################################################  ####
+  ##############################################################################
 
   #Return a data.frame or just an S3 object
   if(as.data.frame){
@@ -165,15 +165,15 @@ FreeformTable <- function(rsid,
 
     #change from default of "value" to dimension name without prepended value
     flattened_df <- dplyr::rename(flattened_df,
-                                  !!strsplit(dimension, "/")[[1]][2] := value)
+                                  !!stringAfterSlash(dimension) := value)
 
     #parse out metrics from data list col
     #go over column as a list, transpose cell so data.frame comes out correct
     #while this may be inefficient, it is one pass over the data, so maybe ok
     parsed_data <- dplyr::bind_rows(lapply(flattened_df$data, function(x) as.data.frame(t(x))))
-    names(parsed_data) <- lapply(metrics, function(x) strsplit(x, "/")[[1]][2])
+    names(parsed_data) <- lapply(metrics, stringAfterSlash)
 
-    #don't need data column after its split into multiple cols
+    #drop data column after its split into multiple cols
     flattened_df$data <- NULL
 
     #bind parts together before return

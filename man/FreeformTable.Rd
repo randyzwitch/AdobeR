@@ -39,6 +39,11 @@ that individual row drill-downs aren't possible due to the constraints of
 the data.frame data structure. Thus, requesting to drill-down by a second
 dimension will do so for all rows, not just a single row.
 }
+\examples{
+\dontrun{
+
+}
+}
 \seealso{
 \code{\link{GetDimensions}} \code{\link{GetMetrics}}
 }
