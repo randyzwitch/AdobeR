@@ -6,7 +6,7 @@
 \usage{
 FreeformTable(rsid, dimension, metrics, startDate, endDate,
   as.data.frame = TRUE, anomalyDetection = FALSE,
-  includePercentChange = FALSE, locale = NULL, globalFilters = NULL,
+  percentChange = FALSE, locale = NULL, globalFilters = NULL,
   search = NULL, statistics = NULL, rowContainer = NULL,
   anchorDate = NULL, show = FALSE)
 }
@@ -25,7 +25,7 @@ FreeformTable(rsid, dimension, metrics, startDate, endDate,
 
 \item{anomalyDetection}{(logical) Calculate anomaly detection report}
 
-\item{includePercentChange}{(logical) Calculate percentage change report}
+\item{percentChange}{(logical) Calculate percentage change report}
 
 \item{anchorDate}{}
 }

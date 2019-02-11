@@ -14,7 +14,7 @@
 #' @param endDate (character/Date) Global report filter: end date
 #' @param as.data.frame (logical) Return result as data.frame
 #' @param anomalyDetection (logical) Calculate anomaly detection report
-#' @param includePercentChange (logical) Calculate percentage change report
+#' @param percentChange (logical) Calculate percentage change report
 #' @param locale
 #' @param globalFilters
 #' @param search
@@ -38,7 +38,7 @@ FreeformTable <- function(rsid,
                           endDate,
                           as.data.frame=TRUE,
                           anomalyDetection=FALSE,
-                          includePercentChange=FALSE,
+                          percentChange=FALSE,
                           locale=NULL,
                           globalFilters=NULL,
                           search=NULL,
@@ -116,7 +116,7 @@ FreeformTable <- function(rsid,
                         limit=50,
                         page=page,
                         includeAnomalyDetection=anomalyDetection,
-                        includePercentChange=includePercentChange
+                        includePercentChange=percentChange
                         )
 
       ) #end of request
@@ -170,7 +170,7 @@ FreeformTable <- function(rsid,
     #parse out metrics from data list col
     #go over column as a list, transpose cell so data.frame comes out correct
     #while this may be inefficient, it is one pass over the data, so maybe ok
-    parsed_data <- dplyr::bind_rows(lapply(flattened_df$data, function(x) as.data.frame(t(x))))
+    parsed_data <- as.data.frame(do.call(rbind, flattened_df$data))
     names(parsed_data) <- lapply(metrics, stringAfterSlash)
 
     #drop data column after its split into multiple cols
@@ -178,6 +178,38 @@ FreeformTable <- function(rsid,
 
     #bind parts together before return
     finaldf <- cbind(flattened_df, parsed_data)
+
+    if(anomalyDetection){
+
+      dExpect <- as.data.frame(do.call(rbind, finaldf$dataExpected))
+      names(dExpect) <- lapply(metrics, function(x) paste(stringAfterSlash(x), "_expected", sep=""))
+      finaldf <- merge(finaldf, dExpect, by = "row.names", all = TRUE, sort=FALSE)[-1]
+      finaldf$dataExpected <- NULL
+
+      dUpper <- as.data.frame(do.call(rbind, finaldf$dataUpperBound))
+      names(dUpper) <- lapply(metrics, function(x) paste(stringAfterSlash(x), "_upperbound", sep=""))
+      finaldf <- merge(finaldf, dUpper, by = "row.names", all = TRUE, sort=FALSE)[-1]
+      finaldf$dataUpperBound <- NULL
+
+      dLower <- as.data.frame(do.call(rbind, finaldf$dataLowerBound))
+      names(dLower) <- lapply(metrics, function(x) paste(stringAfterSlash(x), "_lowerbound", sep=""))
+      finaldf <- merge(finaldf, dLower, by = "row.names", all = TRUE, sort=FALSE)[-1]
+      finaldf$dataLowerBound <- NULL
+
+      anom <- as.data.frame(do.call(rbind, finaldf$dataAnomalyDetected))
+      names(anom) <- lapply(metrics, function(x) paste(stringAfterSlash(x), "_anomaly", sep=""))
+      finaldf <- merge(finaldf, anom, by = "row.names", all = TRUE, sort=FALSE)[-1]
+      finaldf$dataAnomalyDetected <- NULL
+    }
+
+    if(percentChange){
+
+      pc <- as.data.frame(do.call(rbind, finaldf$percentChange))
+      names(pc) <- lapply(metrics, function(x) paste(stringAfterSlash(x), "_pctchg", sep=""))
+      finaldf <- merge(finaldf, pc, by = "row.names", all = TRUE, sort=FALSE)[-1]
+      finaldf$percentChange <- NULL
+
+    }
 
     return(finaldf)
   }
