@@ -33,7 +33,7 @@ AdobeJWT <- function(privatekey,
   val <- jwt_encode_sig(claim = claim, pkey, size = 256)
 
   #make POST call to swap JWT for bearer token
-  token <- POST("https://ims-na1.adobelogin.com/ims/exchange/jwt/",
+  token <- httr::POST("https://ims-na1.adobelogin.com/ims/exchange/jwt/",
                 encode="form",
                 body = list(client_id=clientid,
                             client_secret=secret,
@@ -41,7 +41,7 @@ AdobeJWT <- function(privatekey,
   )
 
   #get content as R object instead of binary
-  cont <- content(token)
+  cont <- httr::content(token)
 
   auth <- list(credentials=cont, app=list(key=clientid))
 

@@ -58,7 +58,7 @@ GetSegments <- function(as.data.frame=TRUE,
   endpoint <- sprintf("https://analytics.adobe.io/api/%s",
                       globalCompanyId)
 
-  resource <- "/segments"
+  resource <- "/segments?includeType=shared"
 
   limit=100
   page=0
