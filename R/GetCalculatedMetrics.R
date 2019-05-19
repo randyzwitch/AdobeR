@@ -64,7 +64,7 @@ GetCalculatedMetrics <- function(as.data.frame=TRUE,
   globalCompanyId <- AdobeRInternals$globalCompanyId
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s", globalCompanyId)
-  resource <- "/calculatedmetrics"
+  resource <- "/calculatedmetrics?includeType=shared"
 
   limit=100
   page=0

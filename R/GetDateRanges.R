@@ -45,7 +45,7 @@ GetDateRanges <- function(as.data.frame=TRUE,
 
   endpoint <- sprintf("https://analytics.adobe.io/api/%s", globalCompanyId)
 
-  resource <- "/dateranges"
+  resource <- "/dateranges?includeType=shared"
 
   limit=100
   page=0
