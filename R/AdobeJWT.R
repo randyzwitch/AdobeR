@@ -1,15 +1,19 @@
-#' Title
+#' Authenticate using JSON Web Tokens
 #'
-#' @param privatekey
-#' @param orgid
-#' @param techacctid
-#' @param clientid
-#' @param secret
+#' @param privatekey Private key associated with the public key uploaded at
+#'   console.adobe.io
+#' @param orgid Organization id provided by Adobe
+#' @param techacctid Technical account id provided by Adobe
+#' @param clientid API key provided by Adobe
+#' @param secret Client secret provided by Adobe
 #'
-#' @return
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#'
+#'
+#' }
 AdobeJWT <- function(privatekey,
                      orgid,
                      techacctid,

@@ -2,14 +2,29 @@
 % Please edit documentation in R/AdobeJWT.R
 \name{AdobeJWT}
 \alias{AdobeJWT}
-\title{Title}
+\title{Authenticate using JSON Web Tokens}
 \usage{
 AdobeJWT(privatekey, orgid, techacctid, clientid, secret,
   globalCompanyId = NULL)
 }
 \arguments{
-\item{secret}{}
+\item{privatekey}{Private key associated with the public key uploaded at
+console.adobe.io}
+
+\item{orgid}{Organization id provided by Adobe}
+
+\item{techacctid}{Technical account id provided by Adobe}
+
+\item{clientid}{API key provided by Adobe}
+
+\item{secret}{Client secret provided by Adobe}
 }
 \description{
-Title
+Authenticate using JSON Web Tokens
+}
+\examples{
+\dontrun{
+
+
+}
 }
