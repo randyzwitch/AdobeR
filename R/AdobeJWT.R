@@ -23,7 +23,7 @@ AdobeJWT <- function(privatekey,
 
   #Need to collapse using paste as readLines will split on newline
   #which makes a list instead of a string
-  pkey <- paste(readLines("private.key"), collapse = "\n")
+  pkey <- paste(readLines(privatekey), collapse = "\n")
 
   #Paste in information from JWT section of Adobe website
   claim <- jose::jwt_claim(exp=as.integer(Sys.time() + 3600 * 24),
@@ -48,7 +48,7 @@ AdobeJWT <- function(privatekey,
   cont <- httr::content(token)
 
   auth <- list(credentials=cont, app=list(key=clientid))
-  authJWT <<- auth
+  #authJWT <<- auth
 
   #Assign to AdobeRInternals environment, so that other functions know where auth located
   assign("auth", auth, envir = AdobeRInternals)

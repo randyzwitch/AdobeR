@@ -86,7 +86,7 @@ AdobeOAuth <- function(key,
          print("Token expired, refresh")
   )
 
-  authDEV <<- AdobeRInternals$auth
+  #authDEV <<- AdobeRInternals$auth
 
   #If user-specifies globalCompanyId, then store it
   #Otherwise, get the id by calling GetUserCompanyAccess and take first row
