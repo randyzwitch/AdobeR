@@ -4,8 +4,12 @@
 \alias{GetDateRanges}
 \title{Get user-defined date ranges for a company account}
 \usage{
-GetDateRanges(as.data.frame = TRUE, locale = NULL,
-  filterByIds = NULL, expansion = NULL)
+GetDateRanges(
+  as.data.frame = TRUE,
+  locale = NULL,
+  filterByIds = NULL,
+  expansion = NULL
+)
 }
 \arguments{
 \item{as.data.frame}{(logical) Return result as data.frame}

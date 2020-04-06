@@ -4,8 +4,13 @@
 \alias{GetMetrics}
 \title{Get metrics (custom events and pre-defined) defined in a given report suite(s)}
 \usage{
-GetMetrics(rsid, as.data.frame = TRUE, locale = NULL,
-  segmentable = NULL, expansion = NULL)
+GetMetrics(
+  rsid,
+  as.data.frame = TRUE,
+  locale = NULL,
+  segmentable = NULL,
+  expansion = NULL
+)
 }
 \arguments{
 \item{rsid}{(character) ID of desired report suite}

@@ -4,8 +4,14 @@
 \alias{AdobeJWT}
 \title{Authenticate using JSON Web Tokens}
 \usage{
-AdobeJWT(privatekey, orgid, techacctid, clientid, secret,
-  globalCompanyId = NULL)
+AdobeJWT(
+  privatekey,
+  orgid,
+  techacctid,
+  clientid,
+  secret,
+  globalCompanyId = NULL
+)
 }
 \arguments{
 \item{privatekey}{Private key associated with the public key uploaded at
