@@ -7,7 +7,6 @@
 #' @return data.frame or S3 (CompanyAccess)
 #' @export
 #'
-#' @seealso \code{\link{AdobeOAuth}}
 #' @examples
 #' \dontrun{
 #'

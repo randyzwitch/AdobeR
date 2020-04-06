@@ -22,6 +22,3 @@ df <- GetUserCompanyAccess()
 discovery <- GetUserCompanyAccess(as.data.frame=FALSE)
 }
 }
-\seealso{
-\code{\link{AdobeOAuth}}
-}
