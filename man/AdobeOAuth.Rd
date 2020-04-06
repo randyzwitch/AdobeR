@@ -4,8 +4,13 @@
 \alias{AdobeOAuth}
 \title{OAuth2 web authentication}
 \usage{
-AdobeOAuth(key, secret, globalCompanyId = NULL, scope = NULL,
-  authfile = ".httr-oauth")
+AdobeOAuth(
+  key,
+  secret,
+  globalCompanyId = NULL,
+  scope = NULL,
+  authfile = ".httr-oauth"
+)
 }
 \arguments{
 \item{key}{(character) API Key (Client ID) from adobe.io console}

@@ -4,9 +4,16 @@
 \alias{GetCalculatedMetrics}
 \title{Get calculated metrics defined in a given report suite(s)}
 \usage{
-GetCalculatedMetrics(as.data.frame = TRUE, rsids = NULL,
-  ownerId = NULL, calculatedMetricFilter = NULL, locale = NULL,
-  name = NULL, tagNames = NULL, expansion = NULL)
+GetCalculatedMetrics(
+  as.data.frame = TRUE,
+  rsids = NULL,
+  ownerId = NULL,
+  calculatedMetricFilter = NULL,
+  locale = NULL,
+  name = NULL,
+  tagNames = NULL,
+  expansion = NULL
+)
 }
 \arguments{
 \item{as.data.frame}{(logical) Return result as data.frame}

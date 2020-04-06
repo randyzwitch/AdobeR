@@ -55,15 +55,6 @@ test_that("Test Get Methods", {
   expect_is(grs.nodf, "ReportSuitesList")
 
 
-# GetTags -----------------------------------------------------------------
-
-  gtag <- GetTags()
-  expect_is(gtag, "data.frame")
-
-  gtag.nodf <- GetTags(as.data.frame = FALSE)
-  expect_is(gtag.nodf, "Tags")
-
-
 # GetDimensions -----------------------------------------------------------
 
   dims <- GetDimensions("zwitchdev")

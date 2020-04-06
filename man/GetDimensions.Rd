@@ -4,9 +4,15 @@
 \alias{GetDimensions}
 \title{Get dimensions (props, eVars, etc.) defined in a given report suite(s)}
 \usage{
-GetDimensions(rsid, as.data.frame = TRUE, locale = NULL,
-  segmentable = NULL, reportable = NULL, classifiable = NULL,
-  expansion = NULL)
+GetDimensions(
+  rsid,
+  as.data.frame = TRUE,
+  locale = NULL,
+  segmentable = NULL,
+  reportable = NULL,
+  classifiable = NULL,
+  expansion = NULL
+)
 }
 \arguments{
 \item{rsid}{(character) The report suite ID}

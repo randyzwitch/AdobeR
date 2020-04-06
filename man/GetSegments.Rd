@@ -4,8 +4,15 @@
 \alias{GetSegments}
 \title{Get user-defined segments for a company account}
 \usage{
-GetSegments(as.data.frame = TRUE, rsids = NULL, segmentFilter = NULL,
-  locale = NULL, name = NULL, tagNames = NULL, expansion = NULL)
+GetSegments(
+  as.data.frame = TRUE,
+  rsids = NULL,
+  segmentFilter = NULL,
+  locale = NULL,
+  name = NULL,
+  tagNames = NULL,
+  expansion = NULL
+)
 }
 \arguments{
 \item{as.data.frame}{(logical) Return result as data.frame}

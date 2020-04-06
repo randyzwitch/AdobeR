@@ -4,8 +4,13 @@
 \alias{GetReportSuites}
 \title{Get report suites for a company account}
 \usage{
-GetReportSuites(rsid = NULL, as.data.frame = TRUE, rsids = NULL,
-  rsidContains = NULL, expansion = NULL)
+GetReportSuites(
+  rsid = NULL,
+  as.data.frame = TRUE,
+  rsids = NULL,
+  rsidContains = NULL,
+  expansion = NULL
+)
 }
 \arguments{
 \item{as.data.frame}{(logical) Return result as data.frame}
